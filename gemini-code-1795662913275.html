@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Informe Técnico de Mantenimiento Preventivo de los Componentes de una Computadora - CETPRO Jesús Obrero, Lima, Perú.">
+  <meta name="author" content="CETPRO Jesús Obrero">
+  <title>Informe Técnico de Mantenimiento Preventivo | CETPRO Jesús Obrero</title>
+
+  <!-- Favicon SVG embebido (funciona sin internet) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231F3A93'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' fill='%23ffffff' font-family='sans-serif' font-weight='bold' font-size='28'%3EJO%3C/text%3E%3C/svg%3E">
+
+  <style>
+    /* ==========================================================================
+       VARIABLES CSS E IDENTIDAD VISUAL (CETPRO JESÚS OBRERO)
+       ========================================================================== */
+    :root {
+      --color-primary: #1F3A93;
+      --color-primary-dark: #15286B;
+      --color-primary-light: #E8EEFA;
+      --color-accent: #C0392B;
+      --color-accent-dark: #992B20;
+      --color-accent-light: #FDECEA;
+
+      --bg-body: #F4F6F9;
+      --bg-alt: #EAEFF5;
+      --bg-card: #FFFFFF;
+      --bg-input: #FFFFFF;
+      --text-main: #1E293B;
+      --text-muted: #526075;
+      --border-color: #D8E0EB;
+
+      --status-success-bg: #E8F7EE;
+      --status-success-text: #146C3B;
+      --status-success-border: #8CD3AA;
+
+      --status-warning-bg: #FFF8E1;
+      --status-warning-text: #8A5A00;
+      --status-warning-border: #F5C242;
+
+      --status-danger-bg: #FDECEA;
+      --status-danger-text: #9B1C1C;
+      --status-danger-border: #F2A29B;
+
+      --status-info-bg: #EBF3FE;
+      --status-info-text: #1A4480;
+      --status-info-border: #9CC0F5;
+
+      /* Fuentes locales del sistema para funcionar 100% offline */
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --header-height: 68px;
+      --transition: 0.22s ease;
+    }
+
+    [data-theme="dark"] {
+      --color-primary: #5B82F6;
+      --color-primary-dark: #3B64E0;
+      --color-primary-light: rgba(91, 130, 246, 0.16);
+      --color-accent: #E55B4D;
+      --color-accent-dark: #C84437;
+      --color-accent-light: rgba(229, 91, 77, 0.16);
+
+      --bg-body: #0F172A;
+      --bg-alt: #162033;
+      --bg-card: #1E293B;
+      --bg-input: #0F172A;
+      --text-main: #F1F5F9;
+      --text-muted: #94A3B8;
+      --border-color: #334155;
+
+      --status-success-bg: rgba(22, 163, 74, 0.16);
+      --status-success-text: #86EFAC;
+      --status-success-border: #166534;
+
+      --status-warning-bg: rgba(234, 179, 8, 0.16);
+      --status-warning-text: #FDE047;
+      --status-warning-border: #854D0E;
+
+      --status-danger-bg: rgba(220, 38, 38, 0.18);
+      --status-danger-text: #FCA5A5;
+      --status-danger-border: #991B1B;
+
+      --status-info-bg: rgba(59, 130, 246, 0.16);
+      --status-info-text: #93C5FD;
+      --status-info-border: #1E40AF;
+
+      --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    /* ==========================================================================
+       RESETEO BÁSICO Y ACCESIBILIDAD
+       ========================================================================== */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-height) + 20px); }
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-main);
+      background-color: var(--bg-body);
+      transition: background-color var(--transition), color var(--transition);
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--color-primary); text-decoration: none; }
+    button, input, select { font: inherit; color: inherit; }
+    :focus-visible { outline: 3px solid var(--color-accent); outline-offset: 2px; }
+
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+    .skip-link {
+      position: absolute; top: -100px; left: 16px; background: var(--color-primary);
+      color: #FFFFFF; padding: 10px 16px; border-radius: var(--radius-sm); z-index: 2000; font-weight: 600;
+    }
+    .skip-link:focus { top: 12px; }
+    .container { width: 100%; max-width: 1140px; margin-inline: auto; padding-inline: 16px; }
+    .print-institutional-header { display: none; }
+
+    /* ==========================================================================
+       FRANJA SUPERIOR Y ENCABEZADO FIJO
+       ========================================================================== */
+    .top-banner { background-color: var(--color-primary-dark); color: #FFFFFF; font-size: 0.78rem; padding: 6px 0; text-align: center; }
+    .top-banner__inner { display: flex; flex-direction: column; gap: 2px; }
+    .top-banner__year, .top-banner__name { margin: 0; }
+    .top-banner__name { font-weight: 700; letter-spacing: 0.03em; }
+
+    .site-header {
+      position: sticky; top: 0; z-index: 1000;
+      background-color: var(--bg-card); border-bottom: 1px solid var(--border-color); box-shadow: var(--shadow-sm);
+    }
+    .header__inner {
+      min-height: var(--header-height); display: flex; align-items: center;
+      justify-content: space-between; gap: 12px; padding-block: 8px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; color: var(--text-main); min-width: 0; }
+    .brand__logo-wrap { width: 42px; height: 42px; flex-shrink: 0; }
+    .brand__logo-fallback {
+      display: flex; width: 42px; height: 42px; border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      color: #FFFFFF; font-weight: 800; font-size: 1rem; align-items: center; justify-content: center;
+    }
+    .brand__text { display: flex; flex-direction: column; line-height: 1.2; }
+    .brand__title { font-weight: 800; font-size: 0.95rem; color: var(--color-primary); }
+    .brand__subtitle { font-size: 0.72rem; color: var(--text-muted); }
+
+    .main-nav {
+      position: absolute; top: 100%; left: 0; right: 0;
+      background-color: var(--bg-card); border-bottom: 1px solid var(--border-color);
+      box-shadow: var(--shadow-md); display: none; padding: 12px 16px 18px;
+    }
+    .main-nav.is-open { display: block; }
+    .nav-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+    .nav-link {
+      display: block; padding: 10px 12px; border-radius: var(--radius-sm);
+      color: var(--text-main); font-weight: 500; font-size: 0.92rem;
+      transition: background-color var(--transition), color var(--transition);
+    }
+    .nav-link:hover, .nav-link.is-active { background-color: var(--color-primary-light); color: var(--color-primary); font-weight: 600; }
+
+    .header__actions { display: flex; align-items: center; gap: 8px; }
+    .global-progress-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background-color: var(--color-primary-light); color: var(--color-primary);
+      padding: 4px 10px; border-radius: 999px; font-size: 0.8rem;
+    }
+    .global-progress-pill__label { display: none; }
+    .icon-btn {
+      width: 38px; height: 38px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color); background-color: var(--bg-body);
+      cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+      transition: background-color var(--transition), border-color var(--transition);
+    }
+    .icon-btn:hover { border-color: var(--color-primary); }
+    [data-theme="light"] .theme-icon--dark { display: none; }
+    [data-theme="dark"] .theme-icon--light { display: none; }
+
+    .menu-toggle {
+      width: 40px; height: 38px; border: 1px solid var(--border-color); border-radius: var(--radius-sm);
+      background-color: var(--bg-body); display: inline-flex; flex-direction: column;
+      justify-content: center; align-items: center; gap: 5px; cursor: pointer;
+    }
+    .menu-toggle__bar { width: 20px; height: 2px; background-color: var(--text-main); border-radius: 2px; }
+
+    .reading-progress { width: 100%; height: 3px; background-color: transparent; }
+    .reading-progress__bar {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+      transition: width 0.1s linear;
+    }
+
+    /* ==========================================================================
+       PORTADA (HERO)
+       ========================================================================== */
+    .hero { padding: 28px 0 36px; background: linear-gradient(180deg, var(--color-primary-light) 0%, var(--bg-body) 100%); }
+    .hero__card {
+      background-color: var(--bg-card); border: 1px solid var(--border-color);
+      border-top: 5px solid var(--color-primary); border-radius: var(--radius-lg);
+      padding: 24px 18px; box-shadow: var(--shadow-md);
+    }
+    .hero__badge {
+      display: inline-block; background-color: var(--color-accent-light); color: var(--color-accent);
+      font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em;
+      padding: 4px 12px; border-radius: 999px; margin-bottom: 12px;
+    }
+    .hero__title { margin: 0 0 20px; font-size: 1.35rem; line-height: 1.3; color: var(--color-primary); font-weight: 800; }
+    .hero__meta-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin-bottom: 22px; }
+    .meta-item {
+      background-color: var(--bg-body); border: 1px solid var(--border-color);
+      border-radius: var(--radius-md); padding: 12px 14px; display: flex; flex-direction: column; gap: 4px;
+    }
+    .meta-item__label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 700; color: var(--text-muted); }
+    .meta-item__value { font-size: 0.95rem; font-weight: 600; color: var(--text-main); }
+
+    .global-progress-box {
+      background-color: var(--bg-body); border: 1px solid var(--border-color);
+      border-radius: var(--radius-md); padding: 14px; margin-bottom: 22px;
+    }
+    .global-progress-box__header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-size: 0.88rem; margin-bottom: 8px; }
+    .hero__actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    /* ==========================================================================
+       SECCIONES, TARJETAS Y COMPONENTES COMUNES
+       ========================================================================== */
+    .section { padding: 40px 0; }
+    .section--alt { background-color: var(--bg-alt); }
+    .section-header { margin-bottom: 22px; }
+    .section-header--row { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+    .section-number { display: inline-block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-accent); margin-bottom: 4px; }
+    .section-title { margin: 0; font-size: 1.3rem; color: var(--color-primary); font-weight: 800; }
+    .section-subtitle { margin: 6px 0 0; color: var(--text-muted); font-size: 0.94rem; }
+    .privacy-note { display: block; margin-top: 4px; font-size: 0.82rem; color: var(--text-muted); }
+
+    .card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px; box-shadow: var(--shadow-sm); }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 10px 18px; border-radius: var(--radius-sm); font-weight: 600; font-size: 0.92rem;
+      border: 1px solid transparent; cursor: pointer;
+      transition: background-color var(--transition), border-color var(--transition), transform 0.12s ease;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn--primary { background-color: var(--color-primary); color: #FFFFFF; }
+    .btn--primary:hover { background-color: var(--color-primary-dark); }
+    .btn--secondary { background-color: var(--color-accent); color: #FFFFFF; }
+    .btn--secondary:hover { background-color: var(--color-accent-dark); }
+    .btn--outline { background-color: transparent; border-color: var(--color-primary); color: var(--color-primary); }
+    .btn--outline:hover { background-color: var(--color-primary-light); }
+    .btn--danger-outline { background-color: transparent; border-color: var(--color-accent); color: var(--color-accent); }
+    .btn--danger-outline:hover { background-color: var(--color-accent-light); }
+    .btn--text { background-color: transparent; color: var(--color-accent); padding: 6px 10px; }
+    .btn--small { padding: 7px 12px; font-size: 0.84rem; }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+    .form-group:last-child { margin-bottom: 0; }
+    .form-group label, .field-label { font-size: 0.85rem; font-weight: 600; color: var(--text-main); }
+    .form-control {
+      width: 100%; padding: 9px 12px; border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm); background-color: var(--bg-input);
+      color: var(--text-main); font-size: 0.92rem;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .form-control:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px var(--color-primary-light); }
+    .form-control.is-invalid { border-color: var(--color-accent); background-color: var(--status-danger-bg); }
+    .field-error { color: var(--status-danger-text); font-size: 0.78rem; min-height: 1em; }
+
+    .progress-track { width: 100%; height: 10px; background-color: var(--border-color); border-radius: 999px; overflow: hidden; }
+    .progress-track--sm { height: 7px; margin-bottom: 14px; }
+    .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--color-primary), #2E8B57); border-radius: 999px; transition: width 0.3s ease; }
+
+    /* ==========================================================================
+       SECCIONES ESPECÍFICAS
+       ========================================================================== */
+    .objective-card { display: flex; flex-direction: column; gap: 12px; border-left: 5px solid var(--color-primary); }
+    .objective-card__icon { font-size: 2rem; }
+    .objective-card__text { margin: 0; font-size: 1.05rem; line-height: 1.7; }
+
+    .tools-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .tool-card {
+      position: relative; display: flex; flex-direction: column; align-items: center;
+      text-align: center; padding: 20px 14px; gap: 10px;
+      transition: transform var(--transition), border-color var(--transition);
+    }
+    .tool-card:hover { transform: translateY(-2px); border-color: var(--color-primary); }
+    .tool-card__icon { font-size: 2rem; }
+    .tool-card__title { margin: 0; font-size: 0.92rem; font-weight: 600; }
+    .badge-optional {
+      position: absolute; top: 8px; right: 8px; background-color: var(--status-warning-bg);
+      color: var(--status-warning-text); border: 1px solid var(--status-warning-border);
+      font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 999px;
+    }
+
+    .accordion-controls { display: flex; gap: 8px; margin-bottom: 14px; }
+    .accordion-list { display: flex; flex-direction: column; gap: 14px; }
+    .accordion-item { padding: 0; overflow: hidden; }
+    .accordion-heading { margin: 0; }
+    .accordion-trigger {
+      width: 100%; background: transparent; border: 0; padding: 16px 18px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      text-align: left; cursor: pointer; transition: background-color var(--transition);
+    }
+    .accordion-trigger:hover { background-color: var(--color-primary-light); }
+    .accordion-trigger__left, .accordion-trigger__right { display: flex; align-items: center; gap: 10px; }
+    .accordion-icon { font-size: 1.35rem; flex-shrink: 0; }
+    .accordion-title { font-weight: 700; font-size: 0.98rem; color: var(--color-primary); }
+    .component-badge {
+      background-color: var(--bg-body); border: 1px solid var(--border-color);
+      padding: 3px 9px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; white-space: nowrap;
+    }
+    .component-badge.is-complete { background-color: var(--status-success-bg); color: var(--status-success-text); border-color: var(--status-success-border); }
+    .accordion-chevron { font-size: 1.1rem; transition: transform var(--transition); }
+    .accordion-trigger[aria-expanded="true"] .accordion-chevron { transform: rotate(180deg); }
+    .accordion-panel__inner { padding: 16px 18px 18px; border-top: 1px solid var(--border-color); }
+
+    .checklist { list-style: none; margin: 0 0 16px; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+    .checklist__item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 10px; border-radius: var(--radius-sm); background-color: var(--bg-body); }
+    .checklist__item input[type="checkbox"] { width: 19px; height: 19px; margin-top: 2px; accent-color: var(--color-primary); cursor: pointer; flex-shrink: 0; }
+    .checklist__item label { cursor: pointer; font-size: 0.94rem; flex: 1; }
+    .checklist__item input[type="checkbox"]:checked + label { text-decoration: line-through; color: var(--text-muted); }
+
+    .result-box {
+      background-color: var(--status-success-bg); color: var(--status-success-text);
+      border: 1px solid var(--status-success-border); border-left: 4px solid #16A34A;
+      border-radius: var(--radius-sm); padding: 12px 14px; font-size: 0.92rem;
+    }
+    .warning-box {
+      display: flex; align-items: flex-start; gap: 10px;
+      background-color: var(--status-warning-bg); color: var(--status-warning-text);
+      border: 1px solid var(--status-warning-border); border-left: 4px solid var(--color-accent);
+      border-radius: var(--radius-sm); padding: 12px 14px; margin-bottom: 14px; font-size: 0.92rem;
+    }
+    .warning-box p { margin: 0; }
+
+    .table-card { padding: 14px; }
+    .control-table { width: 100%; border-collapse: collapse; }
+    .control-table thead { display: none; }
+    .control-table tr { display: block; background-color: var(--bg-body); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 12px; margin-bottom: 12px; }
+    .control-table tr:last-child { margin-bottom: 0; }
+    .control-table td { display: flex; flex-direction: column; gap: 4px; padding: 6px 0; }
+    .control-table td::before { content: attr(data-label); font-size: 0.74rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); }
+
+    .status-select.status-bueno { background-color: var(--status-success-bg); color: var(--status-success-text); border-color: var(--status-success-border); font-weight: 600; }
+    .status-select.status-regular { background-color: var(--status-warning-bg); color: var(--status-warning-text); border-color: var(--status-warning-border); font-weight: 600; }
+    .status-select.status-malo { background-color: var(--status-danger-bg); color: var(--status-danger-text); border-color: var(--status-danger-border); font-weight: 600; }
+
+    .tests-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .tests-intro { margin: 0; font-weight: 600; }
+    .checklist--tests { margin-top: 16px; margin-bottom: 0; }
+    .dual-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+    .full-height-card { height: calc(100% - 62px); }
+    .numbered-list, .recommendations-list { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 12px; }
+    .numbered-list li::marker { color: var(--color-primary); font-weight: 700; }
+    .recommendations-list li::marker { color: var(--color-accent); }
+
+    .evidence-grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-bottom: 20px; }
+    .evidence-card { display: flex; flex-direction: column; gap: 12px; }
+    .evidence-card__title { margin: 0; font-size: 0.96rem; color: var(--color-primary); }
+    .photo-dropzone {
+      position: relative; width: 100%; aspect-ratio: 16 / 10; background-color: var(--bg-body);
+      border: 2px dashed var(--border-color); border-radius: var(--radius-sm);
+      overflow: hidden; display: flex; align-items: center; justify-content: center;
+    }
+    .photo-placeholder { display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--text-muted); font-size: 0.86rem; }
+    .photo-placeholder span:first-child { font-size: 1.8rem; }
+    .photo-preview { width: 100%; height: 100%; object-fit: cover; cursor: pointer; }
+    .photo-zoom-btn {
+      position: absolute; bottom: 8px; right: 8px; background-color: rgba(15, 23, 42, 0.78);
+      color: #FFFFFF; border: 0; padding: 5px 10px; border-radius: var(--radius-sm); font-size: 0.78rem; cursor: pointer;
+    }
+    .evidence-controls { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .photo-upload-label { cursor: pointer; }
+    .info-box {
+      display: flex; align-items: flex-start; gap: 12px;
+      background-color: var(--status-info-bg); color: var(--status-info-text);
+      border: 1px solid var(--status-info-border); border-left: 4px solid var(--color-primary);
+      border-radius: var(--radius-md); padding: 16px; font-size: 0.93rem;
+    }
+    .info-box p { margin: 0; }
+
+    .lightbox { position: fixed; inset: 0; z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .lightbox[hidden] { display: none; }
+    .lightbox__backdrop { position: absolute; inset: 0; background-color: rgba(0, 0, 0, 0.82); }
+    .lightbox__content {
+      position: relative; z-index: 1; max-width: 900px; max-height: 90vh;
+      background-color: var(--bg-card); border-radius: var(--radius-md); padding: 14px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .lightbox__close {
+      position: absolute; top: -14px; right: -14px; width: 36px; height: 36px;
+      border-radius: 50%; border: 0; background-color: var(--color-accent); color: #FFFFFF; font-weight: 700; cursor: pointer;
+    }
+    .lightbox__img { max-height: 75vh; object-fit: contain; border-radius: var(--radius-sm); }
+    .lightbox__caption { margin: 0; text-align: center; font-size: 0.9rem; color: var(--text-main); }
+
+    .inventory-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 22px; }
+    .inventory-card { margin: 0; min-width: 0; }
+    .inventory-card__legend { font-weight: 800; font-size: 0.92rem; color: var(--color-primary); padding: 0 6px; margin-bottom: 10px; }
+    .radio-group { display: flex; gap: 20px; padding-top: 4px; }
+    .radio-option { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-weight: 500; }
+    .radio-option input { accent-color: var(--color-primary); width: 17px; height: 17px; }
+    .inventory-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .signatures-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+    .signature-card { text-align: center; padding: 28px 20px 22px; }
+    .signature-line { width: 80%; max-width: 240px; height: 1px; background-color: var(--text-muted); margin: 32px auto 12px; }
+    .signature-card__role { margin: 0 0 4px; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
+    .signature-card__value { margin: 0; font-weight: 700; font-size: 1rem; color: var(--text-main); }
+
+    .site-footer { background-color: var(--color-primary-dark); color: #FFFFFF; padding: 28px 0; text-align: center; }
+    .footer__inner { display: flex; flex-direction: column; gap: 6px; }
+    .footer__year, .footer__title, .footer__meta { margin: 0; }
+    .footer__year { font-size: 0.85rem; opacity: 0.9; }
+    .footer__title { font-weight: 800; font-size: 0.98rem; }
+    .footer__meta { font-size: 0.82rem; opacity: 0.85; }
+
+    .back-to-top {
+      position: fixed; bottom: 20px; right: 20px; width: 44px; height: 44px;
+      border-radius: 50%; border: 0; background-color: var(--color-primary); color: #FFFFFF;
+      font-size: 1.2rem; font-weight: 700; box-shadow: var(--shadow-md); cursor: pointer; z-index: 900;
+      transition: background-color var(--transition), transform var(--transition);
+    }
+    .back-to-top:hover { background-color: var(--color-accent); transform: translateY(-2px); }
+
+    .toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background-color: #1E293B; color: #FFFFFF; padding: 10px 20px; border-radius: 999px;
+      font-size: 0.88rem; font-weight: 600; box-shadow: var(--shadow-md); z-index: 2100;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE
+       ========================================================================== */
+    @media (min-width: 480px) {
+      .global-progress-pill__label { display: inline; }
+      .hero__card { padding: 30px 26px; }
+      .hero__title { font-size: 1.55rem; }
+      .tools-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (min-width: 768px) {
+      .top-banner__inner { flex-direction: row; justify-content: space-between; align-items: center; }
+      .hero__meta-grid { grid-template-columns: repeat(2, 1fr); }
+      .meta-item--full { grid-column: 1 / -1; }
+      .section-header--row { flex-direction: row; justify-content: space-between; align-items: flex-end; }
+      .objective-card { flex-direction: row; align-items: center; }
+      .tools-grid { grid-template-columns: repeat(4, 1fr); }
+
+      .control-table thead { display: table-header-group; }
+      .control-table tr { display: table-row; background-color: transparent; border: 0; border-bottom: 1px solid var(--border-color); padding: 0; margin: 0; }
+      .control-table th, .control-table td { display: table-cell; padding: 12px 10px; text-align: left; vertical-align: middle; }
+      .control-table th { background-color: var(--color-primary-light); color: var(--color-primary); font-size: 0.85rem; text-transform: uppercase; }
+      .control-table td::before { display: none; }
+
+      .dual-grid, .evidence-grid, .inventory-grid { grid-template-columns: repeat(2, 1fr); }
+      .signatures-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (min-width: 1024px) {
+      .menu-toggle { display: none; }
+      .main-nav { position: static; display: block; background: transparent; border: 0; box-shadow: none; padding: 0; }
+      .nav-list { flex-direction: row; align-items: center; gap: 4px; }
+      .nav-link { padding: 8px 10px; font-size: 0.86rem; }
+      .inventory-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ==========================================================================
+       IMPRESIÓN / GUARDAR COMO PDF
+       ========================================================================== */
+    @media print {
+      body { background: #FFFFFF !important; color: #000000 !important; font-size: 11pt; }
+      .top-banner, .site-header, .no-print, .back-to-top, .toast, .lightbox { display: none !important; }
+      .print-institutional-header { display: block; text-align: center; border-bottom: 2px solid #1F3A93; padding-bottom: 8px; margin-bottom: 16px; }
+      .print-year { margin: 0; font-size: 9pt; }
+      .print-cetpro { margin: 2px 0 0; font-weight: 800; font-size: 11pt; color: #1F3A93; }
+      .section { padding: 16px 0; background: #FFFFFF !important; }
+      .card { box-shadow: none !important; border: 1px solid #CBD5E1; break-inside: avoid; }
+      .accordion-panel[hidden] { display: block !important; }
+      .form-control { border: 1px solid #CBD5E1; background: #FFFFFF !important; color: #000000 !important; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+  <div class="print-institutional-header" aria-hidden="true">
+    <p class="print-year">"Año de la Esperanza y el Fortalecimiento de la Democracia"</p>
+    <p class="print-cetpro">CENTRO DE EDUCACIÓN TÉCNICO PRODUCTIVA "JESÚS OBRERO"</p>
+  </div>
+
+  <div class="top-banner" role="banner">
+    <div class="container top-banner__inner">
+      <p class="top-banner__year">"Año de la Esperanza y el Fortalecimiento de la Democracia"</p>
+      <p class="top-banner__name">CENTRO DE EDUCACIÓN TÉCNICO PRODUCTIVA "JESÚS OBRERO"</p>
+    </div>
+  </div>
+
+  <header class="site-header" id="inicio">
+    <div class="container header__inner">
+      <a href="#portada" class="brand" aria-label="Inicio - CETPRO Jesús Obrero">
+        <div class="brand__logo-wrap">
+          <span class="brand__logo-fallback" aria-hidden="true">JO</span>
+        </div>
+        <div class="brand__text">
+          <span class="brand__title">CETPRO Jesús Obrero</span>
+          <span class="brand__subtitle">Plataformas y Servicios de las TI</span>
+        </div>
+      </a>
+
+      <nav class="main-nav" id="main-nav" aria-label="Navegación principal del informe">
+        <ul class="nav-list">
+          <li><a href="#objetivo" class="nav-link">Objetivo</a></li>
+          <li><a href="#herramientas" class="nav-link">Herramientas</a></li>
+          <li><a href="#procedimiento" class="nav-link">Procedimiento</a></li>
+          <li><a href="#control" class="nav-link">Control</a></li>
+          <li><a href="#pruebas" class="nav-link">Pruebas</a></li>
+          <li><a href="#evidencias" class="nav-link">Evidencias</a></li>
+          <li><a href="#inventario" class="nav-link">Inventario</a></li>
+          <li><a href="#firmas" class="nav-link">Firmas</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__actions">
+        <div class="global-progress-pill" title="Progreso general del informe">
+          <span class="global-progress-pill__label">Avance</span>
+          <strong id="header-progress-pct">0%</strong>
+        </div>
+
+        <button type="button" id="theme-toggle" class="icon-btn" aria-label="Cambiar tema" title="Cambiar tema">
+          <span class="theme-icon theme-icon--light" aria-hidden="true">🌙</span>
+          <span class="theme-icon theme-icon--dark" aria-hidden="true">☀️</span>
+        </button>
+
+        <button type="button" id="menu-toggle" class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
+          <span class="menu-toggle__bar"></span>
+          <span class="menu-toggle__bar"></span>
+          <span class="menu-toggle__bar"></span>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress">
+      <div class="reading-progress__bar" id="reading-progress-bar"></div>
+    </div>
+  </header>
+
+  <main id="contenido-principal">
+    <!-- PORTADA -->
+    <section class="hero" id="portada" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="hero__card">
+          <div class="hero__badge">Informe Técnico Educativo · Lima, Perú</div>
+          <h1 id="hero-title" class="hero__title">
+            INFORME TÉCNICO DE MANTENIMIENTO PREVENTIVO DE LOS COMPONENTES DE UNA COMPUTADORA
+          </h1>
+
+          <div class="hero__meta-grid">
+            <div class="meta-item">
+              <span class="meta-item__label">Institución</span>
+              <span class="meta-item__value">CETPRO Jesús Obrero</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-item__label">Especialidad</span>
+              <span class="meta-item__value">Plataformas y Servicios de las TI</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-item__label">Módulo</span>
+              <span class="meta-item__value">Gestión de Soporte Técnico y Herramientas Informáticas</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-item__label">Docente</span>
+              <span class="meta-item__value">Prof. Marco Rivas L.</span>
+            </div>
+            <div class="meta-item">
+              <label for="input-estudiante" class="meta-item__label">Estudiante</label>
+              <input type="text" id="input-estudiante" class="form-control" placeholder="Ingresa tus apellidos y nombres" autocomplete="name">
+            </div>
+            <div class="meta-item">
+              <label for="input-fecha" class="meta-item__label">Fecha</label>
+              <input type="date" id="input-fecha" class="form-control">
+            </div>
+            <div class="meta-item meta-item--full">
+              <span class="meta-item__label">Equipo</span>
+              <span class="meta-item__value">Placa madre, microprocesador, cooler, memoria, disco mecánico o sólido.</span>
+            </div>
+          </div>
+
+          <div class="global-progress-box">
+            <div class="global-progress-box__header">
+              <span>Progreso general del mantenimiento y pruebas</span>
+              <strong id="global-progress-text">0 de 41 verificaciones (0%)</strong>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" id="global-progress-bar"></div>
+            </div>
+          </div>
+
+          <div class="hero__actions no-print">
+            <a href="#objetivo" class="btn btn--primary">Ver informe ↓</a>
+            <button type="button" id="btn-print" class="btn btn--secondary">🖨️ Imprimir / Guardar como PDF</button>
+            <button type="button" id="btn-reset-all" class="btn btn--danger-outline">Reiniciar todo</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. OBJETIVO -->
+    <section class="section" id="objetivo">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">Sección 1</span>
+          <h2 class="section-title">1. OBJETIVO</h2>
+        </div>
+        <article class="card objective-card">
+          <div class="objective-card__icon" aria-hidden="true">🎯</div>
+          <p class="objective-card__text">
+            Realizar el mantenimiento preventivo de los principales componentes internos de una computadora, eliminando el polvo, verificando sus conexiones y comprobando su correcto funcionamiento para prevenir posibles fallas.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 2. HERRAMIENTAS -->
+    <section class="section section--alt" id="herramientas">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">Sección 2</span>
+          <h2 class="section-title">2. HERRAMIENTAS Y MATERIALES</h2>
+        </div>
+        <div class="tools-grid">
+          <article class="card tool-card"><span class="tool-card__icon">🪛</span><h3 class="tool-card__title">Juego de destornilladores</h3></article>
+          <article class="card tool-card"><span class="tool-card__icon">🖌️</span><h3 class="tool-card__title">Brocha antiestática</h3></article>
+          <article class="card tool-card"><span class="tool-card__icon">💨</span><h3 class="tool-card__title">Aire comprimido</h3></article>
+          <article class="card tool-card"><span class="tool-card__icon">🧪</span><h3 class="tool-card__title">Alcohol isopropílico</h3></article>
+          <article class="card tool-card"><span class="tool-card__icon">🧽</span><h3 class="tool-card__title">Paño de microfibra</h3></article>
+          <article class="card tool-card"><span class="tool-card__icon">⚡</span><h3 class="tool-card__title">Pulsera antiestática</h3></article>
+          <article class="card tool-card"><span class="tool-card__icon">🧴</span><h3 class="tool-card__title">Pasta térmica</h3></article>
+          <article class="card tool-card"><span class="badge-optional">Opcional</span><span class="tool-card__icon">📟</span><h3 class="tool-card__title">Multímetro</h3></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PROCEDIMIENTO -->
+    <section class="section" id="procedimiento">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">Sección 3</span>
+          <h2 class="section-title">3. PROCEDIMIENTO DE MANTENIMIENTO</h2>
+          <p class="section-subtitle">Despliega cada componente y marca los pasos conforme los vayas completando. Tu avance se guarda automáticamente.</p>
+        </div>
+
+        <div class="accordion-controls no-print">
+          <button type="button" id="btn-expand-all" class="btn btn--small btn--outline">Expandir todos</button>
+          <button type="button" id="btn-collapse-all" class="btn btn--small btn--outline">Contraer todos</button>
+        </div>
+
+        <div class="accordion-list" id="accordion-procedimiento">
+          <!-- A. PLACA MADRE -->
+          <article class="card accordion-item" data-component="placa-madre">
+            <h3 class="accordion-heading">
+              <button type="button" class="accordion-trigger" aria-expanded="true" aria-controls="panel-placa-madre">
+                <span class="accordion-trigger__left"><span class="accordion-icon">🖥️</span><span class="accordion-title">A. PLACA MADRE (MAINBOARD)</span></span>
+                <span class="accordion-trigger__right"><span class="component-badge" data-progress-label="placa-madre">0/5</span><span class="accordion-chevron">▾</span></span>
+              </button>
+            </h3>
+            <div class="accordion-panel" id="panel-placa-madre">
+              <div class="accordion-panel__inner">
+                <div class="progress-track progress-track--sm"><div class="progress-fill" data-progress-bar="placa-madre"></div></div>
+                <ul class="checklist">
+                  <li class="checklist__item"><input type="checkbox" id="step-a-1" class="step-checkbox" data-group="placa-madre"><label for="step-a-1">Desconectar la computadora de la corriente eléctrica.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-a-2" class="step-checkbox" data-group="placa-madre"><label for="step-a-2">Retirar cuidadosamente el polvo con una brocha antiestática.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-a-3" class="step-checkbox" data-group="placa-madre"><label for="step-a-3">Revisar los conectores, puertos y pistas.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-a-4" class="step-checkbox" data-group="placa-madre"><label for="step-a-4">Verificar que no existan componentes dañados o capacitores hinchados.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-a-5" class="step-checkbox" data-group="placa-madre"><label for="step-a-5">Comprobar que los cables estén correctamente conectados.</label></li>
+                </ul>
+                <div class="result-box"><strong>Resultado esperado:</strong> Placa madre limpia, conexiones verificadas y sin daños físicos visibles.</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- B. CPU -->
+          <article class="card accordion-item" data-component="cpu">
+            <h3 class="accordion-heading">
+              <button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="panel-cpu">
+                <span class="accordion-trigger__left"><span class="accordion-icon">⚙️</span><span class="accordion-title">B. MICROPROCESADOR (CPU)</span></span>
+                <span class="accordion-trigger__right"><span class="component-badge" data-progress-label="cpu">0/6</span><span class="accordion-chevron">▾</span></span>
+              </button>
+            </h3>
+            <div class="accordion-panel" id="panel-cpu" hidden>
+              <div class="accordion-panel__inner">
+                <div class="progress-track progress-track--sm"><div class="progress-fill" data-progress-bar="cpu"></div></div>
+                <ul class="checklist">
+                  <li class="checklist__item"><input type="checkbox" id="step-b-1" class="step-checkbox" data-group="cpu"><label for="step-b-1">Retirar cuidadosamente el sistema de refrigeración.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-b-2" class="step-checkbox" data-group="cpu"><label for="step-b-2">Extraer el microprocesador únicamente si es necesario.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-b-3" class="step-checkbox" data-group="cpu"><label for="step-b-3">Limpiar los restos de pasta térmica antigua.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-b-4" class="step-checkbox" data-group="cpu"><label for="step-b-4">Revisar los contactos y el estado físico del procesador.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-b-5" class="step-checkbox" data-group="cpu"><label for="step-b-5">Aplicar una pequeña cantidad de pasta térmica nueva.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-b-6" class="step-checkbox" data-group="cpu"><label for="step-b-6">Instalar nuevamente el procesador y su sistema de refrigeración.</label></li>
+                </ul>
+                <div class="result-box"><strong>Resultado esperado:</strong> Microprocesador revisado, correctamente instalado y con adecuada transferencia térmica.</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- C. COOLER -->
+          <article class="card accordion-item" data-component="cooler">
+            <h3 class="accordion-heading">
+              <button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="panel-cooler">
+                <span class="accordion-trigger__left"><span class="accordion-icon">🌀</span><span class="accordion-title">C. COOLER O VENTILADOR</span></span>
+                <span class="accordion-trigger__right"><span class="component-badge" data-progress-label="cooler">0/6</span><span class="accordion-chevron">▾</span></span>
+              </button>
+            </h3>
+            <div class="accordion-panel" id="panel-cooler" hidden>
+              <div class="accordion-panel__inner">
+                <div class="progress-track progress-track--sm"><div class="progress-fill" data-progress-bar="cooler"></div></div>
+                <ul class="checklist">
+                  <li class="checklist__item"><input type="checkbox" id="step-c-1" class="step-checkbox" data-group="cooler"><label for="step-c-1">Desconectar el ventilador de la placa madre.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-c-2" class="step-checkbox" data-group="cooler"><label for="step-c-2">Retirar el polvo acumulado en las aspas.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-c-3" class="step-checkbox" data-group="cooler"><label for="step-c-3">Limpiar el disipador de calor.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-c-4" class="step-checkbox" data-group="cooler"><label for="step-c-4">Verificar que las aspas giren libremente.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-c-5" class="step-checkbox" data-group="cooler"><label for="step-c-5">Comprobar el funcionamiento y el nivel de ruido.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-c-6" class="step-checkbox" data-group="cooler"><label for="step-c-6">Reconectar correctamente el ventilador.</label></li>
+                </ul>
+                <div class="result-box"><strong>Resultado esperado:</strong> Cooler limpio y funcionando correctamente, sin ruidos anormales.</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- D. RAM -->
+          <article class="card accordion-item" data-component="ram">
+            <h3 class="accordion-heading">
+              <button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="panel-ram">
+                <span class="accordion-trigger__left"><span class="accordion-icon">🧩</span><span class="accordion-title">D. MEMORIA RAM</span></span>
+                <span class="accordion-trigger__right"><span class="component-badge" data-progress-label="ram">0/6</span><span class="accordion-chevron">▾</span></span>
+              </button>
+            </h3>
+            <div class="accordion-panel" id="panel-ram" hidden>
+              <div class="accordion-panel__inner">
+                <div class="progress-track progress-track--sm"><div class="progress-fill" data-progress-bar="ram"></div></div>
+                <ul class="checklist">
+                  <li class="checklist__item"><input type="checkbox" id="step-d-1" class="step-checkbox" data-group="ram"><label for="step-d-1">Retirar cuidadosamente los módulos de memoria RAM.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-d-2" class="step-checkbox" data-group="ram"><label for="step-d-2">Revisar que no presenten daños físicos.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-d-3" class="step-checkbox" data-group="ram"><label for="step-d-3">Limpiar el polvo de las ranuras.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-d-4" class="step-checkbox" data-group="ram"><label for="step-d-4">Limpiar los contactos con productos apropiados para electrónica.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-d-5" class="step-checkbox" data-group="ram"><label for="step-d-5">Instalar nuevamente los módulos.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-d-6" class="step-checkbox" data-group="ram"><label for="step-d-6">Verificar que el sistema reconozca la memoria.</label></li>
+                </ul>
+                <div class="result-box"><strong>Resultado esperado:</strong> Memoria RAM limpia, correctamente instalada y reconocida por el sistema.</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- E. HDD -->
+          <article class="card accordion-item" data-component="hdd">
+            <h3 class="accordion-heading">
+              <button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="panel-hdd">
+                <span class="accordion-trigger__left"><span class="accordion-icon">💽</span><span class="accordion-title">E. DISCO DURO MECÁNICO (HDD)</span></span>
+                <span class="accordion-trigger__right"><span class="component-badge" data-progress-label="hdd">0/6</span><span class="accordion-chevron">▾</span></span>
+              </button>
+            </h3>
+            <div class="accordion-panel" id="panel-hdd" hidden>
+              <div class="accordion-panel__inner">
+                <div class="progress-track progress-track--sm"><div class="progress-fill" data-progress-bar="hdd"></div></div>
+                <ul class="checklist">
+                  <li class="checklist__item"><input type="checkbox" id="step-e-1" class="step-checkbox" data-group="hdd"><label for="step-e-1">Desconectar los cables SATA y de alimentación.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-e-2" class="step-checkbox" data-group="hdd"><label for="step-e-2">Limpiar externamente el dispositivo.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-e-3" class="step-checkbox" data-group="hdd"><label for="step-e-3">Revisar los conectores y cables.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-e-4" class="step-checkbox" data-group="hdd"><label for="step-e-4">Verificar su estado mediante herramientas de diagnóstico S.M.A.R.T.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-e-5" class="step-checkbox" data-group="hdd"><label for="step-e-5">Comprobar que no presente ruidos extraños.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-e-6" class="step-checkbox" data-group="hdd"><label for="step-e-6">Revisar el estado de los archivos y realizar una copia de seguridad.</label></li>
+                </ul>
+                <div class="warning-box" role="alert"><span>⚠️</span><p><strong>Importante:</strong> No abrir físicamente el disco duro, ya que sus componentes internos requieren un ambiente especializado.</p></div>
+                <div class="result-box"><strong>Resultado esperado:</strong> Disco duro revisado, conexiones verificadas y estado de funcionamiento comprobado.</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- F. SSD -->
+          <article class="card accordion-item" data-component="ssd">
+            <h3 class="accordion-heading">
+              <button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="panel-ssd">
+                <span class="accordion-trigger__left"><span class="accordion-icon">⚡</span><span class="accordion-title">F. DISCO SÓLIDO (SSD)</span></span>
+                <span class="accordion-trigger__right"><span class="component-badge" data-progress-label="ssd">0/6</span><span class="accordion-chevron">▾</span></span>
+              </button>
+            </h3>
+            <div class="accordion-panel" id="panel-ssd" hidden>
+              <div class="accordion-panel__inner">
+                <div class="progress-track progress-track--sm"><div class="progress-fill" data-progress-bar="ssd"></div></div>
+                <ul class="checklist">
+                  <li class="checklist__item"><input type="checkbox" id="step-f-1" class="step-checkbox" data-group="ssd"><label for="step-f-1">Desconectar el SSD antes de manipularlo.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-f-2" class="step-checkbox" data-group="ssd"><label for="step-f-2">Retirar cuidadosamente el polvo de su superficie.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-f-3" class="step-checkbox" data-group="ssd"><label for="step-f-3">Revisar los conectores SATA o M.2.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-f-4" class="step-checkbox" data-group="ssd"><label for="step-f-4">Comprobar su estado mediante herramientas de diagnóstico.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-f-5" class="step-checkbox" data-group="ssd"><label for="step-f-5">Verificar la capacidad, temperatura y vida útil estimada.</label></li>
+                  <li class="checklist__item"><input type="checkbox" id="step-f-6" class="step-checkbox" data-group="ssd"><label for="step-f-6">Confirmar que el sistema operativo lo reconozca correctamente.</label></li>
+                </ul>
+                <div class="result-box"><strong>Resultado esperado:</strong> Unidad SSD limpia, correctamente conectada y con funcionamiento verificado.</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. CUADRO DE CONTROL -->
+    <section class="section section--alt" id="control">
+      <div class="container">
+        <div class="section-header section-header--row">
+          <div>
+            <span class="section-number">Sección 4</span>
+            <h2 class="section-title">4. CUADRO DE CONTROL DEL MANTENIMIENTO</h2>
+          </div>
+          <button type="button" id="btn-clear-table" class="btn btn--small btn--danger-outline no-print">Limpiar tabla</button>
+        </div>
+
+        <div class="card table-card">
+          <table class="control-table" id="tabla-control">
+            <thead>
+              <tr>
+                <th>Componente</th>
+                <th>Estado</th>
+                <th>Mantenimiento</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Componente"><strong>Placa madre</strong></td>
+                <td data-label="Estado">
+                  <select class="form-control status-select" data-control-status="placa-madre">
+                    <option value="Sin revisar">Sin revisar</option><option value="Bueno">Bueno</option><option value="Regular">Regular</option><option value="Malo">Malo</option>
+                  </select>
+                </td>
+                <td data-label="Mantenimiento"><input type="text" class="form-control" data-control-note="placa-madre" placeholder="Ej. Limpieza con brocha"></td>
+              </tr>
+              <tr>
+                <td data-label="Componente"><strong>Microprocesador</strong></td>
+                <td data-label="Estado">
+                  <select class="form-control status-select" data-control-status="microprocesador">
+                    <option value="Sin revisar">Sin revisar</option><option value="Bueno">Bueno</option><option value="Regular">Regular</option><option value="Malo">Malo</option>
+                  </select>
+                </td>
+                <td data-label="Mantenimiento"><input type="text" class="form-control" data-control-note="microprocesador" placeholder="Ej. Cambio de pasta térmica"></td>
+              </tr>
+              <tr>
+                <td data-label="Componente"><strong>Cooler</strong></td>
+                <td data-label="Estado">
+                  <select class="form-control status-select" data-control-status="cooler">
+                    <option value="Sin revisar">Sin revisar</option><option value="Bueno">Bueno</option><option value="Regular">Regular</option><option value="Malo">Malo</option>
+                  </select>
+                </td>
+                <td data-label="Mantenimiento"><input type="text" class="form-control" data-control-note="cooler" placeholder="Ej. Limpieza de aspas y disipador"></td>
+              </tr>
+              <tr>
+                <td data-label="Componente"><strong>Memoria RAM</strong></td>
+                <td data-label="Estado">
+                  <select class="form-control status-select" data-control-status="memoria-ram">
+                    <option value="Sin revisar">Sin revisar</option><option value="Bueno">Bueno</option><option value="Regular">Regular</option><option value="Malo">Malo</option>
+                  </select>
+                </td>
+                <td data-label="Mantenimiento"><input type="text" class="form-control" data-control-note="memoria-ram" placeholder="Ej. Limpieza de contactos y ranuras"></td>
+              </tr>
+              <tr>
+                <td data-label="Componente"><strong>Disco HDD</strong></td>
+                <td data-label="Estado">
+                  <select class="form-control status-select" data-control-status="disco-hdd">
+                    <option value="Sin revisar">Sin revisar</option><option value="Bueno">Bueno</option><option value="Regular">Regular</option><option value="Malo">Malo</option>
+                  </select>
+                </td>
+                <td data-label="Mantenimiento"><input type="text" class="form-control" data-control-note="disco-hdd" placeholder="Ej. Limpieza externa y prueba S.M.A.R.T."></td>
+              </tr>
+              <tr>
+                <td data-label="Componente"><strong>Disco SSD</strong></td>
+                <td data-label="Estado">
+                  <select class="form-control status-select" data-control-status="disco-ssd">
+                    <option value="Sin revisar">Sin revisar</option><option value="Bueno">Bueno</option><option value="Regular">Regular</option><option value="Malo">Malo</option>
+                  </select>
+                </td>
+                <td data-label="Mantenimiento"><input type="text" class="form-control" data-control-note="disco-ssd" placeholder="Ej. Revisión de vida útil y conectores"></td>
+              </tr>
+              <tr>
+                <td data-label="Componente"><strong>Monitor</strong></td>
+                <td data-label="Estado">
+                  <select class="form-control status-select" data-control-status="monitor">
+                    <option value="Sin revisar">Sin revisar</option><option value="Bueno">Bueno</option><option value="Regular">Regular</option><option value="Malo">Malo</option>
+                  </select>
+                </td>
+                <td data-label="Mantenimiento"><input type="text" class="form-control" data-control-note="monitor" placeholder="Ej. Limpieza con paño de microfibra"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. PRUEBAS -->
+    <section class="section" id="pruebas">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">Sección 5</span>
+          <h2 class="section-title">5. PRUEBAS DE FUNCIONAMIENTO</h2>
+        </div>
+        <article class="card">
+          <div class="tests-header">
+            <p class="tests-intro">Después del mantenimiento se realizaron las siguientes verificaciones:</p>
+            <strong class="component-badge" id="tests-progress-label">0/6 (0%)</strong>
+          </div>
+          <div class="progress-track"><div class="progress-fill" id="tests-progress-bar"></div></div>
+          <ul class="checklist checklist--tests">
+            <li class="checklist__item"><input type="checkbox" id="test-1" class="test-checkbox"><label for="test-1">Encendido correcto de la computadora.</label></li>
+            <li class="checklist__item"><input type="checkbox" id="test-2" class="test-checkbox"><label for="test-2">Reconocimiento del procesador y memoria RAM.</label></li>
+            <li class="checklist__item"><input type="checkbox" id="test-3" class="test-checkbox"><label for="test-3">Detección de los discos HDD y SSD.</label></li>
+            <li class="checklist__item"><input type="checkbox" id="test-4" class="test-checkbox"><label for="test-4">Funcionamiento de los ventiladores.</label></li>
+            <li class="checklist__item"><input type="checkbox" id="test-5" class="test-checkbox"><label for="test-5">Verificación de temperaturas.</label></li>
+            <li class="checklist__item"><input type="checkbox" id="test-6" class="test-checkbox"><label for="test-6">Inicio correcto del sistema operativo.</label></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- 6 y 7. CONCLUSIONES Y RECOMENDACIONES -->
+    <section class="section section--alt" id="conclusiones">
+      <div class="container">
+        <div class="dual-grid">
+          <div>
+            <div class="section-header">
+              <span class="section-number">Sección 6</span>
+              <h2 class="section-title">6. CONCLUSIONES</h2>
+            </div>
+            <article class="card full-height-card">
+              <ol class="numbered-list">
+                <li>Se realizó la limpieza y revisión de los principales componentes internos de la computadora.</li>
+                <li>Se verificaron las conexiones y el estado físico de cada componente.</li>
+                <li>El mantenimiento preventivo permite reducir riesgos de fallas y prolongar la vida útil del equipo.</li>
+              </ol>
+            </article>
+          </div>
+          <div id="recomendaciones">
+            <div class="section-header">
+              <span class="section-number">Sección 7</span>
+              <h2 class="section-title">7. RECOMENDACIONES</h2>
+            </div>
+            <article class="card full-height-card">
+              <ul class="recommendations-list">
+                <li>Realizar mantenimiento preventivo periódicamente.</li>
+                <li>Mantener el equipo en un ambiente limpio y ventilado.</li>
+                <li>Evitar manipular los componentes sin protección antiestática.</li>
+                <li>Realizar copias de seguridad de la información.</li>
+                <li>Controlar las temperaturas y el estado de los dispositivos de almacenamiento.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. EVIDENCIAS -->
+    <section class="section" id="evidencias">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">Sección 8</span>
+          <h2 class="section-title">8. EVIDENCIAS FOTOGRÁFICAS</h2>
+          <p class="section-subtitle">
+            Sube una imagen o toma una foto desde tu celular.
+            <small class="privacy-note">Las fotografías solo se muestran localmente en tu navegador y se incluyen al guardar como PDF.</small>
+          </p>
+        </div>
+
+        <div class="evidence-grid">
+          <!-- Fotografía 1 -->
+          <article class="card evidence-card" data-photo-slot="1">
+            <h3 class="evidence-card__title">Fotografía 1: Mantenimiento de la placa madre.</h3>
+            <div class="photo-dropzone" data-preview-box="1">
+              <img src="" alt="Fotografía 1" class="photo-preview" hidden>
+              <div class="photo-placeholder"><span>📷</span><span>Sin imagen seleccionada</span></div>
+              <button type="button" class="photo-zoom-btn no-print" hidden>🔍 Ampliar</button>
+            </div>
+            <div class="evidence-controls no-print">
+              <label for="photo-input-1" class="btn btn--small btn--outline photo-upload-label">Seleccionar / Tomar foto</label>
+              <input type="file" id="photo-input-1" class="sr-only photo-file-input" accept="image/*" data-slot="1">
+              <button type="button" class="btn btn--small btn--text photo-remove-btn" data-remove-slot="1" hidden>Quitar</button>
+            </div>
+            <div class="form-group">
+              <label for="photo-stage-1">Etapa (opcional)</label>
+              <select id="photo-stage-1" class="form-control photo-stage" data-slot="1">
+                <option value="">Seleccionar etapa...</option><option value="Antes">Antes</option><option value="Durante">Durante</option><option value="Después">Después</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="photo-desc-1">Descripción corta</label>
+              <input type="text" id="photo-desc-1" class="form-control photo-desc" data-slot="1" placeholder="Ej. Limpieza con brocha antiestática">
+            </div>
+          </article>
+
+          <!-- Fotografía 2 -->
+          <article class="card evidence-card" data-photo-slot="2">
+            <h3 class="evidence-card__title">Fotografía 2: Limpieza del microprocesador y cooler.</h3>
+            <div class="photo-dropzone" data-preview-box="2">
+              <img src="" alt="Fotografía 2" class="photo-preview" hidden>
+              <div class="photo-placeholder"><span>📷</span><span>Sin imagen seleccionada</span></div>
+              <button type="button" class="photo-zoom-btn no-print" hidden>🔍 Ampliar</button>
+            </div>
+            <div class="evidence-controls no-print">
+              <label for="photo-input-2" class="btn btn--small btn--outline photo-upload-label">Seleccionar / Tomar foto</label>
+              <input type="file" id="photo-input-2" class="sr-only photo-file-input" accept="image/*" data-slot="2">
+              <button type="button" class="btn btn--small btn--text photo-remove-btn" data-remove-slot="2" hidden>Quitar</button>
+            </div>
+            <div class="form-group">
+              <label for="photo-stage-2">Etapa (opcional)</label>
+              <select id="photo-stage-2" class="form-control photo-stage" data-slot="2">
+                <option value="">Seleccionar etapa...</option><option value="Antes">Antes</option><option value="Durante">Durante</option><option value="Después">Después</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="photo-desc-2">Descripción corta</label>
+              <input type="text" id="photo-desc-2" class="form-control photo-desc" data-slot="2" placeholder="Ej. Aplicación de nueva pasta térmica">
+            </div>
+          </article>
+
+          <!-- Fotografía 3 -->
+          <article class="card evidence-card" data-photo-slot="3">
+            <h3 class="evidence-card__title">Fotografía 3: Revisión de la memoria RAM.</h3>
+            <div class="photo-dropzone" data-preview-box="3">
+              <img src="" alt="Fotografía 3" class="photo-preview" hidden>
+              <div class="photo-placeholder"><span>📷</span><span>Sin imagen seleccionada</span></div>
+              <button type="button" class="photo-zoom-btn no-print" hidden>🔍 Ampliar</button>
+            </div>
+            <div class="evidence-controls no-print">
+              <label for="photo-input-3" class="btn btn--small btn--outline photo-upload-label">Seleccionar / Tomar foto</label>
+              <input type="file" id="photo-input-3" class="sr-only photo-file-input" accept="image/*" data-slot="3">
+              <button type="button" class="btn btn--small btn--text photo-remove-btn" data-remove-slot="3" hidden>Quitar</button>
+            </div>
+            <div class="form-group">
+              <label for="photo-stage-3">Etapa (opcional)</label>
+              <select id="photo-stage-3" class="form-control photo-stage" data-slot="3">
+                <option value="">Seleccionar etapa...</option><option value="Antes">Antes</option><option value="Durante">Durante</option><option value="Después">Después</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="photo-desc-3">Descripción corta</label>
+              <input type="text" id="photo-desc-3" class="form-control photo-desc" data-slot="3" placeholder="Ej. Limpieza de pines y ranuras">
+            </div>
+          </article>
+
+          <!-- Fotografía 4 -->
+          <article class="card evidence-card" data-photo-slot="4">
+            <h3 class="evidence-card__title">Fotografía 4: Mantenimiento del disco duro HDD.</h3>
+            <div class="photo-dropzone" data-preview-box="4">
+              <img src="" alt="Fotografía 4" class="photo-preview" hidden>
+              <div class="photo-placeholder"><span>📷</span><span>Sin imagen seleccionada</span></div>
+              <button type="button" class="photo-zoom-btn no-print" hidden>🔍 Ampliar</button>
+            </div>
+            <div class="evidence-controls no-print">
+              <label for="photo-input-4" class="btn btn--small btn--outline photo-upload-label">Seleccionar / Tomar foto</label>
+              <input type="file" id="photo-input-4" class="sr-only photo-file-input" accept="image/*" data-slot="4">
+              <button type="button" class="btn btn--small btn--text photo-remove-btn" data-remove-slot="4" hidden>Quitar</button>
+            </div>
+            <div class="form-group">
+              <label for="photo-stage-4">Etapa (opcional)</label>
+              <select id="photo-stage-4" class="form-control photo-stage" data-slot="4">
+                <option value="">Seleccionar etapa...</option><option value="Antes">Antes</option><option value="Durante">Durante</option><option value="Después">Después</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="photo-desc-4">Descripción corta</label>
+              <input type="text" id="photo-desc-4" class="form-control photo-desc" data-slot="4" placeholder="Ej. Revisión de cables SATA">
+            </div>
+          </article>
+
+          <!-- Fotografía 5 -->
+          <article class="card evidence-card" data-photo-slot="5">
+            <h3 class="evidence-card__title">Fotografía 5: Revisión del disco sólido SSD.</h3>
+            <div class="photo-dropzone" data-preview-box="5">
+              <img src="" alt="Fotografía 5" class="photo-preview" hidden>
+              <div class="photo-placeholder"><span>📷</span><span>Sin imagen seleccionada</span></div>
+              <button type="button" class="photo-zoom-btn no-print" hidden>🔍 Ampliar</button>
+            </div>
+            <div class="evidence-controls no-print">
+              <label for="photo-input-5" class="btn btn--small btn--outline photo-upload-label">Seleccionar / Tomar foto</label>
+              <input type="file" id="photo-input-5" class="sr-only photo-file-input" accept="image/*" data-slot="5">
+              <button type="button" class="btn btn--small btn--text photo-remove-btn" data-remove-slot="5" hidden>Quitar</button>
+            </div>
+            <div class="form-group">
+              <label for="photo-stage-5">Etapa (opcional)</label>
+              <select id="photo-stage-5" class="form-control photo-stage" data-slot="5">
+                <option value="">Seleccionar etapa...</option><option value="Antes">Antes</option><option value="Durante">Durante</option><option value="Después">Después</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="photo-desc-5">Descripción corta</label>
+              <input type="text" id="photo-desc-5" class="form-control photo-desc" data-slot="5" placeholder="Ej. Verificación de salud del SSD">
+            </div>
+          </article>
+        </div>
+
+        <div class="info-box">
+          <span>💡</span>
+          <p><strong>Recomendación para el estudiante:</strong> Adjuntar fotografías reales del antes, durante y después del mantenimiento.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- INVENTARIO -->
+    <section class="section section--alt" id="inventario">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">Anexo Técnico</span>
+          <h2 class="section-title">INVENTARIO DE LOS COMPONENTES ANALIZADOS</h2>
+          <p class="section-subtitle">Registra las especificaciones técnicas del equipo. Los datos se guardan automáticamente en este navegador.</p>
+        </div>
+
+        <form id="inventory-form" novalidate>
+          <div class="inventory-grid">
+            <fieldset class="card inventory-card">
+              <legend class="inventory-card__legend">1. PLACA MADRE</legend>
+              <div class="form-group"><label for="inv-mb-tipo">Tipo de placa madre</label><input type="text" id="inv-mb-tipo" name="mb_tipo" class="form-control" placeholder="Ej. ATX / Micro-ATX"></div>
+              <div class="form-group"><label for="inv-mb-modelo">Modelo de la placa madre</label><input type="text" id="inv-mb-modelo" name="mb_modelo" class="form-control" placeholder="Ej. ASUS PRIME H510M-E"></div>
+            </fieldset>
+
+            <fieldset class="card inventory-card">
+              <legend class="inventory-card__legend">2. MICROPROCESADOR</legend>
+              <div class="form-group"><label for="inv-cpu-tipo">Tipo del procesador</label><input type="text" id="inv-cpu-tipo" name="cpu_tipo" class="form-control" placeholder="Ej. Intel Core i5"></div>
+              <div class="form-group"><label for="inv-cpu-gen">Generación</label><input type="text" id="inv-cpu-gen" name="cpu_generacion" class="form-control" placeholder="Ej. 10ma Generación"></div>
+              <div class="form-group"><label for="inv-cpu-socket">Socket</label><input type="text" id="inv-cpu-socket" name="cpu_socket" class="form-control" placeholder="Ej. LGA 1200"></div>
+              <div class="form-group"><label for="inv-cpu-speed">Velocidad o Core speed</label><input type="text" id="inv-cpu-speed" name="cpu_velocidad" class="form-control" placeholder="Ej. 2.90 GHz"></div>
+            </fieldset>
+
+            <fieldset class="card inventory-card">
+              <legend class="inventory-card__legend">3. MEMORIA</legend>
+              <div class="form-group"><label for="inv-ram-cap">Capacidad</label><input type="text" id="inv-ram-cap" name="ram_capacidad" class="form-control" placeholder="Ej. 8 GB / 16 GB"></div>
+              <div class="form-group"><label for="inv-ram-tipo">Tipo de memoria</label><input type="text" id="inv-ram-tipo" name="ram_tipo" class="form-control" placeholder="Ej. DDR4 2666 MHz"></div>
+              <div class="form-group"><label for="inv-ram-slots">Slot o ranuras</label><input type="text" id="inv-ram-slots" name="ram_slots" class="form-control" placeholder="Ej. 2 de 2 ranuras"></div>
+            </fieldset>
+
+            <fieldset class="card inventory-card">
+              <legend class="inventory-card__legend">4. TARJETA DE VIDEO</legend>
+              <div class="form-group"><label for="inv-gpu-nombre">Nombre</label><input type="text" id="inv-gpu-nombre" name="gpu_nombre" class="form-control" placeholder="Ej. Intel UHD Graphics 630"></div>
+              <div class="form-group"><label for="inv-gpu-mem">Memoria que utiliza</label><input type="text" id="inv-gpu-mem" name="gpu_memoria" class="form-control" placeholder="Ej. 2 GB / Integrada"></div>
+            </fieldset>
+
+            <fieldset class="card inventory-card">
+              <legend class="inventory-card__legend">5. MONITOR</legend>
+              <div class="form-group"><label for="inv-monitor-tipo">Tipo de monitor</label><input type="text" id="inv-monitor-tipo" name="monitor_tipo" class="form-control" placeholder="Ej. LED 21.5 pulgadas Full HD"></div>
+            </fieldset>
+
+            <fieldset class="card inventory-card">
+              <legend class="inventory-card__legend">6. TECLADO</legend>
+              <div class="form-group"><label for="inv-teclado-marca">Marca del teclado</label><input type="text" id="inv-teclado-marca" name="teclado_marca" class="form-control" placeholder="Ej. Logitech / HP"></div>
+            </fieldset>
+
+            <fieldset class="card inventory-card">
+              <legend class="inventory-card__legend">7. MOUSE</legend>
+              <div class="form-group"><label for="inv-mouse-marca">Marca del mouse</label><input type="text" id="inv-mouse-marca" name="mouse_marca" class="form-control" placeholder="Ej. Logitech / HP"></div>
+            </fieldset>
+
+            <fieldset class="card inventory-card">
+              <legend class="inventory-card__legend">8. SWITCH</legend>
+              <div class="form-group"><label for="inv-switch-marca">Marca</label><input type="text" id="inv-switch-marca" name="switch_marca" class="form-control" placeholder="Ej. TP-Link / Cisco"></div>
+              <div class="form-group"><label for="inv-switch-puertos">Puertos</label><input type="number" id="inv-switch-puertos" name="switch_puertos" class="form-control" min="1" max="128" placeholder="Ej. 24"></div>
+            </fieldset>
+
+            <fieldset class="card inventory-card">
+              <legend class="inventory-card__legend">9. PROYECTOR</legend>
+              <div class="form-group"><label for="inv-proyector-marca">Marca</label><input type="text" id="inv-proyector-marca" name="proyector_marca" class="form-control" placeholder="Ej. Epson / BenQ"></div>
+            </fieldset>
+
+            <fieldset class="card inventory-card">
+              <legend class="inventory-card__legend">10. ECRAN</legend>
+              <div class="form-group">
+                <span class="field-label">¿Funciona?</span>
+                <div class="radio-group">
+                  <label class="radio-option"><input type="radio" name="ecran_funciona" value="Sí"><span>Sí</span></label>
+                  <label class="radio-option"><input type="radio" name="ecran_funciona" value="No"><span>No</span></label>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="card inventory-card">
+              <legend class="inventory-card__legend">11. INTERNET</legend>
+              <div class="form-group"><label for="inv-net-ipv4">IPv4</label><input type="text" id="inv-net-ipv4" name="internet_ipv4" class="form-control" placeholder="Ej. 192.168.137.10"></div>
+              <div class="form-group"><label for="inv-net-mask">Máscara de subred</label><input type="text" id="inv-net-mask" name="internet_mascara" class="form-control" placeholder="Ej. 255.255.255.0"></div>
+              <div class="form-group"><label for="inv-net-gateway">Puerta de enlace</label><input type="text" id="inv-net-gateway" name="internet_gateway" class="form-control" value="192.168.137.1"></div>
+            </fieldset>
+
+            <fieldset class="card inventory-card">
+              <legend class="inventory-card__legend">12. TELEVISOR</legend>
+              <div class="form-group"><label for="inv-tv-marca">Marca</label><input type="text" id="inv-tv-marca" name="tv_marca" class="form-control" placeholder="Ej. Samsung / LG"></div>
+              <div class="form-group"><label for="inv-tv-pulgadas">Pulgadas</label><input type="number" id="inv-tv-pulgadas" name="tv_pulgadas" class="form-control" min="10" max="120" placeholder="Ej. 55"></div>
+            </fieldset>
+          </div>
+
+          <div class="inventory-actions no-print">
+            <button type="submit" class="btn btn--primary">💾 Guardar</button>
+            <button type="button" id="btn-export-inventory" class="btn btn--secondary">⬇️ Exportar inventario (.json)</button>
+            <button type="button" id="btn-clear-inventory" class="btn btn--danger-outline">🗑️ Borrar todo</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- 9. FIRMAS -->
+    <section class="section" id="firmas">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">Sección 9</span>
+          <h2 class="section-title">9. FIRMAS</h2>
+        </div>
+        <div class="signatures-grid">
+          <article class="card signature-card">
+            <div class="signature-line"></div>
+            <h3 class="signature-card__role">Estudiante</h3>
+            <p class="signature-card__value" id="firma-estudiante">Sin especificar</p>
+          </article>
+          <article class="card signature-card">
+            <div class="signature-line"></div>
+            <h3 class="signature-card__role">Docente</h3>
+            <p class="signature-card__value">Prof. Marco Rivas L.</p>
+          </article>
+          <article class="card signature-card">
+            <div class="signature-line"></div>
+            <h3 class="signature-card__role">Fecha</h3>
+            <p class="signature-card__value" id="firma-fecha">Sin especificar</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer__inner">
+      <p class="footer__year">"Año de la Esperanza y el Fortalecimiento de la Democracia"</p>
+      <p class="footer__title">CENTRO DE EDUCACIÓN TÉCNICO PRODUCTIVA "JESÚS OBRERO"</p>
+      <p class="footer__meta">Especialidad: Plataformas y Servicios de las TI · Módulo: Gestión de Soporte Técnico y Herramientas Informáticas</p>
+    </div>
+  </footer>
+
+  <button type="button" id="btn-back-to-top" class="back-to-top no-print" aria-label="Volver arriba" hidden>↑</button>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" hidden>
+    <div class="lightbox__backdrop" id="lightbox-backdrop"></div>
+    <div class="lightbox__content">
+      <button type="button" class="lightbox__close" id="lightbox-close" aria-label="Cerrar">✕</button>
+      <img src="" alt="" id="lightbox-img" class="lightbox__img">
+      <p id="lightbox-caption" class="lightbox__caption"></p>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <!-- Enlace al archivo JavaScript local -->
+  <script src="app.js"></script>
+</body>
+</html>
