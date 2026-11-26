@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para ti ❤️</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #ffe6eb;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .contenedor {
+      position: relative;
+      cursor: pointer;
+    }
+
+    /* Sobre */
+    .sobre {
+      position: relative;
+      width: 300px;
+      height: 200px;
+      background-color: #ff4d6d;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Solapa superior */
+    .solapa {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 150px solid transparent;
+      border-right: 150px solid transparent;
+      border-top: 110px solid #ff758f;
+      transform-origin: top;
+      transition: transform 0.6s ease;
+      z-index: 3;
+    }
+
+    /* Frente del sobre */
+    .frente {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 150px solid #ff4d6d;
+      border-right: 150px solid #ff4d6d;
+      border-top: 100px solid transparent;
+      border-bottom: 100px solid #c9184a;
+      border-radius: 0 0 10px 10px;
+      z-index: 2;
+    }
+
+    /* Carta interior */
+    .carta {
+      position: absolute;
+      bottom: 10px;
+      left: 15px;
+      width: 270px;
+      height: 180px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.6s ease, z-index 0.6s;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .carta h1 {
+      color: #c9184a;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .carta p {
+      color: #444;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .firma {
+      margin-top: 12px;
+      font-weight: bold;
+      color: #ff4d6d;
+    }
+
+    /* Animación al abrir */
+    .contenedor.abierto .solapa {
+      transform: rotateX(180deg);
+      z-index: 0;
+    }
+
+    .contenedor.abierto .carta {
+      transform: translateY(-110px);
+      z-index: 4;
+    }
+
+    .instruccion {
+      margin-top: 30px;
+      color: #c9184a;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    /* Corazones flotantes */
+    .corazon {
+      position: fixed;
+      bottom: -20px;
+      font-size: 20px;
+      animation: flotar 3s linear forwards;
+      pointer-events: none;
+    }
+
+    @keyframes flotar {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="contenedor" id="sobre">
+    <div class="sobre">
+      <div class="solapa"></div>
+      <div class="carta">
+        <!-- EDITA TU MENSAJE AQUÍ -->
+        <h1>¡Feliz San Valentín! ❤️</h1>
+        <p>
+          Gracias por hacer mis días mucho más bonitos. 
+          Eres la mejor parte de mi vida y quería recordarte lo mucho que te quiero.
+        </p>
+        <p class="firma">Con todo mi cariño</p>
+      </div>
+      <div class="frente"></div>
+    </div>
+  </div>
+
+  <p class="instruccion" id="texto-ayuda">Toca el sobre para abrirlo 💌</p>
+
+  <script>
+    const sobre = document.getElementById('sobre');
+    const textoAyuda = document.getElementById('texto-ayuda');
+
+    sobre.addEventListener('click', () => {
+      sobre.classList.toggle('abierto');
+
+      if (sobre.classList.contains('abierto')) {
+        textoAyuda.textContent = 'Toca de nuevo para cerrarlo';
+        lanzarCorazones();
+      } else {
+        textoAyuda.textContent = 'Toca el sobre para abrirlo 💌';
+      }
+    });
+
+    function lanzarCorazones() {
+      for (let i = 0; i < 15; i++) {
+        setTimeout(() => {
+          const corazon = document.createElement('div');
+          corazon.classList.add('corazon');
+          corazon.textContent = '❤️';
+          corazon.style.left = Math.random() * 100 + 'vw';
+          corazon.style.animationDuration = (Math.random() * 2 + 2) + 's';
+          document.body.appendChild(corazon);
+
+          setTimeout(() => corazon.remove(), 4000);
+        }, i * 100);
+      }
+    }
+  </script>
+
+</body>
+</html>
