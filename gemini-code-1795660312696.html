@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Informe Técnico de Mantenimiento Preventivo de los Componentes de una Computadora - CETPRO Jesús Obrero, Lima, Perú.">
+  <title>Informe Técnico de Mantenimiento Preventivo | CETPRO Jesús Obrero</title>
+  <!-- Favicon con respaldo SVG inline -->
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231F3A93'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='28'%3EJO%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Encabezado exclusivo para impresión -->
+  <div class="print-header" aria-hidden="true">
+    <p class="print-motto">Año de la Esperanza y el Fortalecimiento de la Democracia</p>
+    <p class="print-inst">CENTRO DE EDUCACIÓN TÉCNICO PRODUCTIVA "JESÚS OBRERO"</p>
+  </div>
+
+  <!-- Franja institucional superior -->
+  <div class="top-banner" role="banner">
+    <div class="container top-banner__inner">
+      <span>Año de la Esperanza y el Fortalecimiento de la Democracia</span>
+      <span class="top-banner__sep" aria-hidden="true">|</span>
+      <strong>CENTRO DE EDUCACIÓN TÉCNICO PRODUCTIVA "JESÚS OBRERO"</strong>
+    </div>
+  </div>
+
+  <!-- Barra de navegación fija -->
+  <header class="site-header" id="inicio">
+    <div class="container header-inner">
+      <a href="#inicio" class="brand" aria-label="Inicio - CETPRO Jesús Obrero">
+        <img src="assets/img/logo.png" alt="Logo CETPRO Jesús Obrero" class="brand__logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <span class="brand__fallback" aria-hidden="true">JO</span>
+        <span class="brand__name">CETPRO Jesús Obrero</span>
+      </a>
+
+      <nav class="main-nav" id="mainNav" aria-label="Navegación principal">
+        <ul class="nav-list">
+          <li><a href="#objetivo" class="nav-link">1. Objetivo</a></li>
+          <li><a href="#herramientas" class="nav-link">2. Herramientas</a></li>
+          <li><a href="#procedimiento" class="nav-link">3. Procedimiento</a></li>
+          <li><a href="#control" class="nav-link">4. Control</a></li>
+          <li><a href="#pruebas" class="nav-link">5. Pruebas</a></li>
+          <li><a href="#conclusiones" class="nav-link">6-7. Conclusiones</a></li>
+          <li><a href="#evidencias" class="nav-link">8. Evidencias</a></li>
+          <li><a href="#firmas" class="nav-link">9. Firmas</a></li>
+          <li><a href="#inventario" class="nav-link">Inventario</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Indicador compacto de progreso global -->
+        <div class="global-progress-pill" title="Progreso general del informe (pasos y pruebas)">
+          <span class="sr-only">Progreso del informe:</span>
+          <span id="globalProgressText">0%</span>
+        </div>
+
+        <!-- Botón de modo claro / oscuro -->
+        <button type="button" id="themeToggle" class="icon-btn" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema">
+          <span id="themeIcon" aria-hidden="true">🌙</span>
+        </button>
+
+        <!-- Botón menú hamburguesa (móvil) -->
+        <button type="button" id="menuToggle" class="icon-btn menu-toggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mainNav">
+          <span aria-hidden="true">☰</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Barra de progreso de lectura -->
+    <div class="reading-progress" role="progressbar" aria-label="Progreso de lectura" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div class="reading-progress__bar" id="readingProgressBar"></div>
+    </div>
+  </header>
+
+  <main>
+    <!-- PORTADA (HERO) -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card fade-in">
+          <div class="hero-badge">Especialidad: Plataformas y Servicios de las TI</div>
+          <h1 class="hero-title">INFORME TÉCNICO DE MANTENIMIENTO PREVENTIVO DE LOS COMPONENTES DE UNA COMPUTADORA</h1>
+
+          <div class="hero-grid">
+            <div class="hero-meta">
+              <div class="meta-item">
+                <span class="meta-label">Institución</span>
+                <span class="meta-value">CETPRO Jesús Obrero</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Especialidad</span>
+                <span class="meta-value">Plataformas y Servicios de las TI</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Módulo</span>
+                <span class="meta-value">Gestión de Soporte Técnico y Herramientas Informáticas</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Docente</span>
+                <span class="meta-value">Prof. Marco Rivas L.</span>
+              </div>
+              <div class="meta-item meta-item--full">
+                <span class="meta-label">Equipo</span>
+                <span class="meta-value">Placa madre, microprocesador, cooler, memoria, disco mecánico o sólido.</span>
+              </div>
+            </div>
+
+            <!-- Campos editables del estudiante y fecha -->
+            <div class="hero-form">
+              <div class="form-group">
+                <label for="studentName">Estudiante</label>
+                <input type="text" id="studentName" name="studentName" placeholder="Ingresa tu nombre completo" autocomplete="name">
+              </div>
+              <div class="form-group">
+                <label for="reportDate">Fecha</label>
+                <input type="date" id="reportDate" name="reportDate">
+              </div>
+              <p class="form-hint">Los datos se guardan automáticamente en este navegador y se muestran en la sección de Firmas.</p>
+            </div>
+          </div>
+
+          <!-- Progreso general y botones de acción -->
+          <div class="hero-footer">
+            <div class="hero-progress">
+              <div class="progress-header">
+                <span>Progreso general del informe</span>
+                <strong id="heroProgressLabel">0% completado</strong>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" id="heroProgressBar" style="width: 0%;"></div>
+              </div>
+            </div>
+
+            <div class="hero-cta">
+              <a href="#objetivo" class="btn btn-primary">Ver informe ↓</a>
+              <button type="button" id="printBtn" class="btn btn-secondary">🖨️ Imprimir / Guardar como PDF</button>
+              <button type="button" id="resetAllBtn" class="btn btn-danger-outline">🔄 Reiniciar todo</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 1: OBJETIVO -->
+    <section id="objetivo" class="section fade-in">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">SECCIÓN 1</span>
+          <h2>OBJETIVO</h2>
+        </div>
+        <article class="card objective-card">
+          <p>Realizar el mantenimiento preventivo de los principales componentes internos de una computadora, eliminando el polvo, verificando sus conexiones y comprobando su correcto funcionamiento para prevenir posibles fallas.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: HERRAMIENTAS Y MATERIALES -->
+    <section id="herramientas" class="section fade-in">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">SECCIÓN 2</span>
+          <h2>HERRAMIENTAS Y MATERIALES</h2>
+        </div>
+        <div class="tools-grid">
+          <article class="card tool-card">
+            <span class="tool-icon" aria-hidden="true">🪛</span>
+            <h3>Juego de destornilladores</h3>
+          </article>
+          <article class="card tool-card">
+            <span class="tool-icon" aria-hidden="true">🖌️</span>
+            <h3>Brocha antiestática</h3>
+          </article>
+          <article class="card tool-card">
+            <span class="tool-icon" aria-hidden="true">💨</span>
+            <h3>Aire comprimido</h3>
+          </article>
+          <article class="card tool-card">
+            <span class="tool-icon" aria-hidden="true">🧪</span>
+            <h3>Alcohol isopropílico</h3>
+          </article>
+          <article class="card tool-card">
+            <span class="tool-icon" aria-hidden="true">🧻</span>
+            <h3>Paño de microfibra</h3>
+          </article>
+          <article class="card tool-card">
+            <span class="tool-icon" aria-hidden="true">⌚</span>
+            <h3>Pulsera antiestática</h3>
+          </article>
+          <article class="card tool-card">
+            <span class="tool-icon" aria-hidden="true">🧴</span>
+            <h3>Pasta térmica</h3>
+          </article>
+          <article class="card tool-card">
+            <span class="badge-optional">Opcional</span>
+            <span class="tool-icon" aria-hidden="true">📟</span>
+            <h3>Multímetro</h3>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: PROCEDIMIENTO DE MANTENIMIENTO -->
+    <section id="procedimiento" class="section fade-in">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">SECCIÓN 3</span>
+          <h2>PROCEDIMIENTO DE MANTENIMIENTO</h2>
+          <p class="section-desc">Marca cada paso conforme lo completes. Tu avance se guarda automáticamente.</p>
+        </div>
+
+        <div class="accordion-list" id="procedureList">
+          <!-- A. PLACA MADRE -->
+          <article class="card accordion-item is-open" data-component="placa">
+            <button type="button" class="accordion-trigger" aria-expanded="true">
+              <div class="accordion-title-wrap">
+                <span class="comp-icon" aria-hidden="true">🖥️</span>
+                <div>
+                  <h3>A. PLACA MADRE (MAINBOARD)</h3>
+                  <div class="mini-progress">
+                    <div class="progress-track"><div class="progress-fill" data-progress-bar="placa"></div></div>
+                    <span class="mini-progress__text" data-progress-text="placa">0/5</span>
+                  </div>
+                </div>
+              </div>
+              <span class="accordion-chevron" aria-hidden="true">▼</span>
+            </button>
+            <div class="accordion-content">
+              <ul class="checklist">
+                <li><label><input type="checkbox" class="step-check" data-group="placa" data-id="placa-1"><span>Desconectar la computadora de la corriente eléctrica.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="placa" data-id="placa-2"><span>Retirar cuidadosamente el polvo con una brocha antiestática.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="placa" data-id="placa-3"><span>Revisar los conectores, puertos y pistas.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="placa" data-id="placa-4"><span>Verificar que no existan componentes dañados o capacitores hinchados.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="placa" data-id="placa-5"><span>Comprobar que los cables estén correctamente conectados.</span></label></li>
+              </ul>
+              <div class="result-box">
+                <strong>Resultado esperado:</strong> Placa madre limpia, conexiones verificadas y sin daños físicos visibles.
+              </div>
+            </div>
+          </article>
+
+          <!-- B. MICROPROCESADOR -->
+          <article class="card accordion-item" data-component="cpu">
+            <button type="button" class="accordion-trigger" aria-expanded="false">
+              <div class="accordion-title-wrap">
+                <span class="comp-icon" aria-hidden="true">⚙️</span>
+                <div>
+                  <h3>B. MICROPROCESADOR (CPU)</h3>
+                  <div class="mini-progress">
+                    <div class="progress-track"><div class="progress-fill" data-progress-bar="cpu"></div></div>
+                    <span class="mini-progress__text" data-progress-text="cpu">0/6</span>
+                  </div>
+                </div>
+              </div>
+              <span class="accordion-chevron" aria-hidden="true">▼</span>
+            </button>
+            <div class="accordion-content">
+              <ul class="checklist">
+                <li><label><input type="checkbox" class="step-check" data-group="cpu" data-id="cpu-1"><span>Retirar cuidadosamente el sistema de refrigeración.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="cpu" data-id="cpu-2"><span>Extraer el microprocesador únicamente si es necesario.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="cpu" data-id="cpu-3"><span>Limpiar los restos de pasta térmica antigua.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="cpu" data-id="cpu-4"><span>Revisar los contactos y el estado físico del procesador.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="cpu" data-id="cpu-5"><span>Aplicar una pequeña cantidad de pasta térmica nueva.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="cpu" data-id="cpu-6"><span>Instalar nuevamente el procesador y su sistema de refrigeración.</span></label></li>
+              </ul>
+              <div class="result-box">
+                <strong>Resultado esperado:</strong> Microprocesador revisado, correctamente instalado y con adecuada transferencia térmica.
+              </div>
+            </div>
+          </article>
+
+          <!-- C. COOLER O VENTILADOR -->
+          <article class="card accordion-item" data-component="cooler">
+            <button type="button" class="accordion-trigger" aria-expanded="false">
+              <div class="accordion-title-wrap">
+                <span class="comp-icon" aria-hidden="true">🌀</span>
+                <div>
+                  <h3>C. COOLER O VENTILADOR</h3>
+                  <div class="mini-progress">
+                    <div class="progress-track"><div class="progress-fill" data-progress-bar="cooler"></div></div>
+                    <span class="mini-progress__text" data-progress-text="cooler">0/6</span>
+                  </div>
+                </div>
+              </div>
+              <span class="accordion-chevron" aria-hidden="true">▼</span>
+            </button>
+            <div class="accordion-content">
+              <ul class="checklist">
+                <li><label><input type="checkbox" class="step-check" data-group="cooler" data-id="cooler-1"><span>Desconectar el ventilador de la placa madre.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="cooler" data-id="cooler-2"><span>Retirar el polvo acumulado en las aspas.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="cooler" data-id="cooler-3"><span>Limpiar el disipador de calor.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="cooler" data-id="cooler-4"><span>Verificar que las aspas giren libremente.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="cooler" data-id="cooler-5"><span>Comprobar el funcionamiento y el nivel de ruido.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="cooler" data-id="cooler-6"><span>Reconectar correctamente el ventilador.</span></label></li>
+              </ul>
+              <div class="result-box">
+                <strong>Resultado esperado:</strong> Cooler limpio y funcionando correctamente, sin ruidos anormales.
+              </div>
+            </div>
+          </article>
+
+          <!-- D. MEMORIA RAM -->
+          <article class="card accordion-item" data-component="ram">
+            <button type="button" class="accordion-trigger" aria-expanded="false">
+              <div class="accordion-title-wrap">
+                <span class="comp-icon" aria-hidden="true">🧩</span>
+                <div>
+                  <h3>D. MEMORIA RAM</h3>
+                  <div class="mini-progress">
+                    <div class="progress-track"><div class="progress-fill" data-progress-bar="ram"></div></div>
+                    <span class="mini-progress__text" data-progress-text="ram">0/6</span>
+                  </div>
+                </div>
+              </div>
+              <span class="accordion-chevron" aria-hidden="true">▼</span>
+            </button>
+            <div class="accordion-content">
+              <ul class="checklist">
+                <li><label><input type="checkbox" class="step-check" data-group="ram" data-id="ram-1"><span>Retirar cuidadosamente los módulos de memoria RAM.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="ram" data-id="ram-2"><span>Revisar que no presenten daños físicos.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="ram" data-id="ram-3"><span>Limpiar el polvo de las ranuras.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="ram" data-id="ram-4"><span>Limpiar los contactos con productos apropiados para electrónica.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="ram" data-id="ram-5"><span>Instalar nuevamente los módulos.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="ram" data-id="ram-6"><span>Verificar que el sistema reconozca la memoria.</span></label></li>
+              </ul>
+              <div class="result-box">
+                <strong>Resultado esperado:</strong> Memoria RAM limpia, correctamente instalada y reconocida por el sistema.
+              </div>
+            </div>
+          </article>
+
+          <!-- E. DISCO DURO MECÁNICO (HDD) -->
+          <article class="card accordion-item" data-component="hdd">
+            <button type="button" class="accordion-trigger" aria-expanded="false">
+              <div class="accordion-title-wrap">
+                <span class="comp-icon" aria-hidden="true">💿</span>
+                <div>
+                  <h3>E. DISCO DURO MECÁNICO (HDD)</h3>
+                  <div class="mini-progress">
+                    <div class="progress-track"><div class="progress-fill" data-progress-bar="hdd"></div></div>
+                    <span class="mini-progress__text" data-progress-text="hdd">0/6</span>
+                  </div>
+                </div>
+              </div>
+              <span class="accordion-chevron" aria-hidden="true">▼</span>
+            </button>
+            <div class="accordion-content">
+              <div class="warning-box" role="alert">
+                <strong>⚠️ Importante:</strong> No abrir físicamente el disco duro, ya que sus componentes internos requieren un ambiente especializado.
+              </div>
+              <ul class="checklist">
+                <li><label><input type="checkbox" class="step-check" data-group="hdd" data-id="hdd-1"><span>Desconectar los cables SATA y de alimentación.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="hdd" data-id="hdd-2"><span>Limpiar externamente el dispositivo.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="hdd" data-id="hdd-3"><span>Revisar los conectores y cables.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="hdd" data-id="hdd-4"><span>Verificar su estado mediante herramientas de diagnóstico S.M.A.R.T.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="hdd" data-id="hdd-5"><span>Comprobar que no presente ruidos extraños.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="hdd" data-id="hdd-6"><span>Revisar el estado de los archivos y realizar una copia de seguridad.</span></label></li>
+              </ul>
+              <div class="result-box">
+                <strong>Resultado esperado:</strong> Disco duro revisado, conexiones verificadas y estado de funcionamiento comprobado.
+              </div>
+            </div>
+          </article>
+
+          <!-- F. DISCO SÓLIDO (SSD) -->
+          <article class="card accordion-item" data-component="ssd">
+            <button type="button" class="accordion-trigger" aria-expanded="false">
+              <div class="accordion-title-wrap">
+                <span class="comp-icon" aria-hidden="true">⚡</span>
+                <div>
+                  <h3>F. DISCO SÓLIDO (SSD)</h3>
+                  <div class="mini-progress">
+                    <div class="progress-track"><div class="progress-fill" data-progress-bar="ssd"></div></div>
+                    <span class="mini-progress__text" data-progress-text="ssd">0/6</span>
+                  </div>
+                </div>
+              </div>
+              <span class="accordion-chevron" aria-hidden="true">▼</span>
+            </button>
+            <div class="accordion-content">
+              <ul class="checklist">
+                <li><label><input type="checkbox" class="step-check" data-group="ssd" data-id="ssd-1"><span>Desconectar el SSD antes de manipularlo.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="ssd" data-id="ssd-2"><span>Retirar cuidadosamente el polvo de su superficie.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="ssd" data-id="ssd-3"><span>Revisar los conectores SATA o M.2.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="ssd" data-id="ssd-4"><span>Comprobar su estado mediante herramientas de diagnóstico.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="ssd" data-id="ssd-5"><span>Verificar la capacidad, temperatura y vida útil estimada.</span></label></li>
+                <li><label><input type="checkbox" class="step-check" data-group="ssd" data-id="ssd-6"><span>Confirmar que el sistema operativo lo reconozca correctamente.</span></label></li>
+              </ul>
+              <div class="result-box">
+                <strong>Resultado esperado:</strong> Unidad SSD limpia, correctamente conectada y con funcionamiento verificado.
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: CUADRO DE CONTROL DEL MANTENIMIENTO -->
+    <section id="control" class="section fade-in">
+      <div class="container">
+        <div class="section-header section-header--flex">
+          <div>
+            <span class="section-num">SECCIÓN 4</span>
+            <h2>CUADRO DE CONTROL DEL MANTENIMIENTO</h2>
+          </div>
+          <button type="button" id="clearTableBtn" class="btn btn-secondary btn-sm">Limpiar tabla</button>
+        </div>
+
+        <div class="card table-card">
+          <table class="control-table" id="controlTable">
+            <thead>
+              <tr>
+                <th scope="col">Componente</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Mantenimiento</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Componente"><strong>Placa madre</strong></td>
+                <td data-label="Estado">
+                  <label class="sr-only" for="estado-placa">Estado de Placa madre</label>
+                  <select id="estado-placa" class="status-select" data-row="placa">
+                    <option value="sin-revisar">Sin revisar</option>
+                    <option value="bueno">Bueno</option>
+                    <option value="regular">Regular</option>
+                    <option value="malo">Malo</option>
+                  </select>
+                </td>
+                <td data-label="Mantenimiento">
+                  <label class="sr-only" for="mant-placa">Mantenimiento de Placa madre</label>
+                  <input type="text" id="mant-placa" class="mant-input" data-row="placa" placeholder="Ej. Limpieza con brocha">
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Componente"><strong>Microprocesador</strong></td>
+                <td data-label="Estado">
+                  <label class="sr-only" for="estado-cpu">Estado de Microprocesador</label>
+                  <select id="estado-cpu" class="status-select" data-row="cpu">
+                    <option value="sin-revisar">Sin revisar</option>
+                    <option value="bueno">Bueno</option>
+                    <option value="regular">Regular</option>
+                    <option value="malo">Malo</option>
+                  </select>
+                </td>
+                <td data-label="Mantenimiento">
+                  <label class="sr-only" for="mant-cpu">Mantenimiento de Microprocesador</label>
+                  <input type="text" id="mant-cpu" class="mant-input" data-row="cpu" placeholder="Ej. Cambio de pasta térmica">
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Componente"><strong>Cooler</strong></td>
+                <td data-label="Estado">
+                  <label class="sr-only" for="estado-cooler">Estado de Cooler</label>
+                  <select id="estado-cooler" class="status-select" data-row="cooler">
+                    <option value="sin-revisar">Sin revisar</option>
+                    <option value="bueno">Bueno</option>
+                    <option value="regular">Regular</option>
+                    <option value="malo">Malo</option>
+                  </select>
+                </td>
+                <td data-label="Mantenimiento">
+                  <label class="sr-only" for="mant-cooler">Mantenimiento de Cooler</label>
+                  <input type="text" id="mant-cooler" class="mant-input" data-row="cooler" placeholder="Ej. Limpieza de aspas y disipador">
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Componente"><strong>Memoria RAM</strong></td>
+                <td data-label="Estado">
+                  <label class="sr-only" for="estado-ram">Estado de Memoria RAM</label>
+                  <select id="estado-ram" class="status-select" data-row="ram">
+                    <option value="sin-revisar">Sin revisar</option>
+                    <option value="bueno">Bueno</option>
+                    <option value="regular">Regular</option>
+                    <option value="malo">Malo</option>
+                  </select>
+                </td>
+                <td data-label="Mantenimiento">
+                  <label class="sr-only" for="mant-ram">Mantenimiento de Memoria RAM</label>
+                  <input type="text" id="mant-ram" class="mant-input" data-row="ram" placeholder="Ej. Limpieza de contactos y ranuras">
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Componente"><strong>Disco HDD</strong></td>
+                <td data-label="Estado">
+                  <label class="sr-only" for="estado-hdd">Estado de Disco HDD</label>
+                  <select id="estado-hdd" class="status-select" data-row="hdd">
+                    <option value="sin-revisar">Sin revisar</option>
+                    <option value="bueno">Bueno</option>
+                    <option value="regular">Regular</option>
+                    <option value="malo">Malo</option>
+                  </select>
+                </td>
+                <td data-label="Mantenimiento">
+                  <label class="sr-only" for="mant-hdd">Mantenimiento de Disco HDD</label>
+                  <input type="text" id="mant-hdd" class="mant-input" data-row="hdd" placeholder="Ej. Revisión S.M.A.R.T. y limpieza externa">
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Componente"><strong>Disco SSD</strong></td>
+                <td data-label="Estado">
+                  <label class="sr-only" for="estado-ssd">Estado de Disco SSD</label>
+                  <select id="estado-ssd" class="status-select" data-row="ssd">
+                    <option value="sin-revisar">Sin revisar</option>
+                    <option value="bueno">Bueno</option>
+                    <option value="regular">Regular</option>
+                    <option value="malo">Malo</option>
+                  </select>
+                </td>
+                <td data-label="Mantenimiento">
+                  <label class="sr-only" for="mant-ssd">Mantenimiento de Disco SSD</label>
+                  <input type="text" id="mant-ssd" class="mant-input" data-row="ssd" placeholder="Ej. Limpieza superficial y diagnóstico">
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Componente"><strong>Monitor</strong></td>
+                <td data-label="Estado">
+                  <label class="sr-only" for="estado-monitor">Estado de Monitor</label>
+                  <select id="estado-monitor" class="status-select" data-row="monitor">
+                    <option value="sin-revisar">Sin revisar</option>
+                    <option value="bueno">Bueno</option>
+                    <option value="regular">Regular</option>
+                    <option value="malo">Malo</option>
+                  </select>
+                </td>
+                <td data-label="Mantenimiento">
+                  <label class="sr-only" for="mant-monitor">Mantenimiento de Monitor</label>
+                  <input type="text" id="mant-monitor" class="mant-input" data-row="monitor" placeholder="Ej. Limpieza con paño de microfibra">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 5: PRUEBAS DE FUNCIONAMIENTO -->
+    <section id="pruebas" class="section fade-in">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">SECCIÓN 5</span>
+          <h2>PRUEBAS DE FUNCIONAMIENTO</h2>
+        </div>
+        <article class="card">
+          <p class="lead-text">Después del mantenimiento se realizaron las siguientes verificaciones:</p>
+
+          <div class="tests-progress">
+            <div class="progress-header">
+              <span>Avance de pruebas</span>
+              <strong id="testsProgressText">0/6 (0%)</strong>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" id="testsProgressBar" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <ul class="checklist">
+            <li><label><input type="checkbox" class="test-check" data-id="test-1"><span>Encendido correcto de la computadora.</span></label></li>
+            <li><label><input type="checkbox" class="test-check" data-id="test-2"><span>Reconocimiento del procesador y memoria RAM.</span></label></li>
+            <li><label><input type="checkbox" class="test-check" data-id="test-3"><span>Detección de los discos HDD y SSD.</span></label></li>
+            <li><label><input type="checkbox" class="test-check" data-id="test-4"><span>Funcionamiento de los ventiladores.</span></label></li>
+            <li><label><input type="checkbox" class="test-check" data-id="test-5"><span>Verificación de temperaturas.</span></label></li>
+            <li><label><input type="checkbox" class="test-check" data-id="test-6"><span>Inicio correcto del sistema operativo.</span></label></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECCIONES 6 Y 7: CONCLUSIONES Y RECOMENDACIONES -->
+    <section id="conclusiones" class="section fade-in">
+      <div class="container">
+        <div class="two-col-grid">
+          <div>
+            <div class="section-header">
+              <span class="section-num">SECCIÓN 6</span>
+              <h2>CONCLUSIONES</h2>
+            </div>
+            <article class="card">
+              <ol class="styled-ol">
+                <li>Se realizó la limpieza y revisión de los principales componentes internos de la computadora.</li>
+                <li>Se verificaron las conexiones y el estado físico de cada componente.</li>
+                <li>El mantenimiento preventivo permite reducir riesgos de fallas y prolongar la vida útil del equipo.</li>
+              </ol>
+            </article>
+          </div>
+
+          <div>
+            <div class="section-header">
+              <span class="section-num">SECCIÓN 7</span>
+              <h2>RECOMENDACIONES</h2>
+            </div>
+            <article class="card">
+              <ul class="styled-ul">
+                <li>Realizar mantenimiento preventivo periódicamente.</li>
+                <li>Mantener el equipo en un ambiente limpio y ventilado.</li>
+                <li>Evitar manipular los componentes sin protección antiestática.</li>
+                <li>Realizar copias de seguridad de la información.</li>
+                <li>Controlar las temperaturas y el estado de los dispositivos de almacenamiento.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 8: EVIDENCIAS FOTOGRÁFICAS -->
+    <section id="evidencias" class="section fade-in">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">SECCIÓN 8</span>
+          <h2>EVIDENCIAS FOTOGRÁFICAS</h2>
+          <p class="section-desc">Las fotografías no se suben a ningún servidor; solo se muestran localmente en tu navegador.</p>
+        </div>
+
+        <div class="evidence-grid">
+          <!-- Fotografía 1 -->
+          <article class="card evidence-card" data-slot="1">
+            <h3>Fotografía 1</h3>
+            <p class="evidence-subtitle">Mantenimiento de la placa madre.</p>
+            <div class="photo-dropzone" data-slot="1">
+              <img src="" alt="Vista previa fotografía 1" class="photo-preview" hidden>
+              <span class="photo-placeholder">📷 Sin fotografía cargada</span>
+            </div>
+            <div class="photo-actions">
+              <label class="btn btn-secondary btn-sm file-label">
+                Subir / Tomar foto
+                <input type="file" accept="image/*" class="photo-input sr-only" data-slot="1">
+              </label>
+              <button type="button" class="btn btn-danger-outline btn-sm remove-photo-btn" data-slot="1" hidden>Quitar</button>
+            </div>
+            <div class="form-group">
+              <label for="stage-1">Etapa (opcional)</label>
+              <select id="stage-1" class="evidence-stage" data-slot="1">
+                <option value="">Seleccionar...</option>
+                <option value="Antes">Antes</option>
+                <option value="Durante">Durante</option>
+                <option value="Después">Después</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="desc-1">Descripción corta</label>
+              <input type="text" id="desc-1" class="evidence-desc" data-slot="1" placeholder="Ej. Limpieza con brocha antiestática">
+            </div>
+          </article>
+
+          <!-- Fotografía 2 -->
+          <article class="card evidence-card" data-slot="2">
+            <h3>Fotografía 2</h3>
+            <p class="evidence-subtitle">Limpieza del microprocesador y cooler.</p>
+            <div class="photo-dropzone" data-slot="2">
+              <img src="" alt="Vista previa fotografía 2" class="photo-preview" hidden>
+              <span class="photo-placeholder">📷 Sin fotografía cargada</span>
+            </div>
+            <div class="photo-actions">
+              <label class="btn btn-secondary btn-sm file-label">
+                Subir / Tomar foto
+                <input type="file" accept="image/*" class="photo-input sr-only" data-slot="2">
+              </label>
+              <button type="button" class="btn btn-danger-outline btn-sm remove-photo-btn" data-slot="2" hidden>Quitar</button>
+            </div>
+            <div class="form-group">
+              <label for="stage-2">Etapa (opcional)</label>
+              <select id="stage-2" class="evidence-stage" data-slot="2">
+                <option value="">Seleccionar...</option>
+                <option value="Antes">Antes</option>
+                <option value="Durante">Durante</option>
+                <option value="Después">Después</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="desc-2">Descripción corta</label>
+              <input type="text" id="desc-2" class="evidence-desc" data-slot="2" placeholder="Ej. Aplicación de nueva pasta térmica">
+            </div>
+          </article>
+
+          <!-- Fotografía 3 -->
+          <article class="card evidence-card" data-slot="3">
+            <h3>Fotografía 3</h3>
+            <p class="evidence-subtitle">Revisión de la memoria RAM.</p>
+            <div class="photo-dropzone" data-slot="3">
+              <img src="" alt="Vista previa fotografía 3" class="photo-preview" hidden>
+              <span class="photo-placeholder">📷 Sin fotografía cargada</span>
+            </div>
+            <div class="photo-actions">
+              <label class="btn btn-secondary btn-sm file-label">
+                Subir / Tomar foto
+                <input type="file" accept="image/*" class="photo-input sr-only" data-slot="3">
+              </label>
+              <button type="button" class="btn btn-danger-outline btn-sm remove-photo-btn" data-slot="3" hidden>Quitar</button>
+            </div>
+            <div class="form-group">
+              <label for="stage-3">Etapa (opcional)</label>
+              <select id="stage-3" class="evidence-stage" data-slot="3">
+                <option value="">Seleccionar...</option>
+                <option value="Antes">Antes</option>
+                <option value="Durante">Durante</option>
+                <option value="Después">Después</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="desc-3">Descripción corta</label>
+              <input type="text" id="desc-3" class="evidence-desc" data-slot="3" placeholder="Ej. Verificación de pines y ranuras">
+            </div>
+          </article>
+
+          <!-- Fotografía 4 -->
+          <article class="card evidence-card" data-slot="4">
+            <h3>Fotografía 4</h3>
+            <p class="evidence-subtitle">Mantenimiento del disco duro HDD.</p>
+            <div class="photo-dropzone" data-slot="4">
+              <img src="" alt="Vista previa fotografía 4" class="photo-preview" hidden>
+              <span class="photo-placeholder">📷 Sin fotografía cargada</span>
+            </div>
+            <div class="photo-actions">
+              <label class="btn btn-secondary btn-sm file-label">
+                Subir / Tomar foto
+                <input type="file" accept="image/*" class="photo-input sr-only" data-slot="4">
+              </label>
+              <button type="button" class="btn btn-danger-outline btn-sm remove-photo-btn" data-slot="4" hidden>Quitar</button>
+            </div>
+            <div class="form-group">
+              <label for="stage-4">Etapa (opcional)</label>
+              <select id="stage-4" class="evidence-stage" data-slot="4">
+                <option value="">Seleccionar...</option>
+                <option value="Antes">Antes</option>
+                <option value="Durante">Durante</option>
+                <option value="Después">Después</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="desc-4">Descripción corta</label>
+              <input type="text" id="desc-4" class="evidence-desc" data-slot="4" placeholder="Ej. Limpieza externa y revisión de cables">
+            </div>
+          </article>
+
+          <!-- Fotografía 5 -->
+          <article class="card evidence-card" data-slot="5">
+            <h3>Fotografía 5</h3>
+            <p class="evidence-subtitle">Revisión del disco sólido SSD.</p>
+            <div class="photo-dropzone" data-slot="5">
+              <img src="" alt="Vista previa fotografía 5" class="photo-preview" hidden>
+              <span class="photo-placeholder">📷 Sin fotografía cargada</span>
+            </div>
+            <div class="photo-actions">
+              <label class="btn btn-secondary btn-sm file-label">
+                Subir / Tomar foto
+                <input type="file" accept="image/*" class="photo-input sr-only" data-slot="5">
+              </label>
+              <button type="button" class="btn btn-danger-outline btn-sm remove-photo-btn" data-slot="5" hidden>Quitar</button>
+            </div>
+            <div class="form-group">
+              <label for="stage-5">Etapa (opcional)</label>
+              <select id="stage-5" class="evidence-stage" data-slot="5">
+                <option value="">Seleccionar...</option>
+                <option value="Antes">Antes</option>
+                <option value="Durante">Durante</option>
+                <option value="Después">Después</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="desc-5">Descripción corta</label>
+              <input type="text" id="desc-5" class="evidence-desc" data-slot="5" placeholder="Ej. Revisión de conector y diagnóstico">
+            </div>
+          </article>
+        </div>
+
+        <div class="info-box">
+          <strong>Recomendación para el estudiante:</strong> Adjuntar fotografías reales del antes, durante y después del mantenimiento. Los resultados deben corresponder a las pruebas efectivamente realizadas, no solamente al procedimiento descrito.
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 9: FIRMAS -->
+    <section id="firmas" class="section fade-in">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">SECCIÓN 9</span>
+          <h2>9. FIRMAS</h2>
+        </div>
+
+        <div class="signatures-grid">
+          <article class="card signature-card">
+            <div class="signature-line" aria-hidden="true"></div>
+            <p class="signature-role">Estudiante</p>
+            <p class="signature-value" id="sigStudent">____________________________</p>
+          </article>
+
+          <article class="card signature-card">
+            <div class="signature-line" aria-hidden="true"></div>
+            <p class="signature-role">Docente</p>
+            <p class="signature-value">Prof. Marco Rivas L.</p>
+          </article>
+
+          <article class="card signature-card">
+            <div class="signature-line" aria-hidden="true"></div>
+            <p class="signature-role">Fecha</p>
+            <p class="signature-value" id="sigDate">____________________________</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- INVENTARIO DE LOS COMPONENTES ANALIZADOS -->
+    <section id="inventario" class="section fade-in">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">ANEXO TÉCNICO</span>
+          <h2>INVENTARIO DE LOS COMPONENTES ANALIZADOS</h2>
+          <p class="section-desc">Registra las especificaciones técnicas del equipo evaluado. Todos los campos se guardan automáticamente.</p>
+        </div>
+
+        <form id="inventoryForm" novalidate>
+          <div class="inventory-grid">
+            <!-- 1. PLACA MADRE -->
+            <article class="card inv-card">
+              <h3>1. PLACA MADRE</h3>
+              <div class="form-group">
+                <label for="inv-mb-tipo">Tipo de placa madre</label>
+                <input type="text" id="inv-mb-tipo" name="mbTipo" placeholder="Ej. ATX, Micro-ATX">
+              </div>
+              <div class="form-group">
+                <label for="inv-mb-modelo">Modelo de la placa madre</label>
+                <input type="text" id="inv-mb-modelo" name="mbModelo" placeholder="Ej. ASUS Prime H610M-E">
+              </div>
+            </article>
+
+            <!-- 2. MICROPROCESADOR -->
+            <article class="card inv-card">
+              <h3>2. MICROPROCESADOR</h3>
+              <div class="form-group">
+                <label for="inv-cpu-tipo">Tipo del procesador</label>
+                <input type="text" id="inv-cpu-tipo" name="cpuTipo" placeholder="Ej. Intel Core i5 / AMD Ryzen 5">
+              </div>
+              <div class="form-group">
+                <label for="inv-cpu-gen">Generación</label>
+                <input type="text" id="inv-cpu-gen" name="cpuGen" placeholder="Ej. 12va Generación">
+              </div>
+              <div class="form-group">
+                <label for="inv-cpu-socket">Socket</label>
+                <input type="text" id="inv-cpu-socket" name="cpuSocket" placeholder="Ej. LGA 1700 / AM4">
+              </div>
+              <div class="form-group">
+                <label for="inv-cpu-speed">Velocidad o Core speed</label>
+                <input type="text" id="inv-cpu-speed" name="cpuSpeed" placeholder="Ej. 2.50 GHz">
+              </div>
+            </article>
+
+            <!-- 3. MEMORIA -->
+            <article class="card inv-card">
+              <h3>3. MEMORIA</h3>
+              <div class="form-group">
+                <label for="inv-ram-cap">Capacidad</label>
+                <input type="text" id="inv-ram-cap" name="ramCap" placeholder="Ej. 8 GB / 16 GB">
+              </div>
+              <div class="form-group">
+                <label for="inv-ram-tipo">Tipo de memoria que usa</label>
+                <input type="text" id="inv-ram-tipo" name="ramTipo" placeholder="Ej. DDR4">
+              </div>
+              <div class="form-group">
+                <label for="inv-ram-slots">Slot o ranuras que usa</label>
+                <input type="text" id="inv-ram-slots" name="ramSlots" placeholder="Ej. 2 de 4">
+              </div>
+            </article>
+
+            <!-- 4. TARJETA DE VIDEO -->
+            <article class="card inv-card">
+              <h3>4. TARJETA DE VIDEO</h3>
+              <div class="form-group">
+                <label for="inv-gpu-nombre">Nombre de la tarjeta de video</label>
+                <input type="text" id="inv-gpu-nombre" name="gpuNombre" placeholder="Ej. Intel UHD Graphics 730">
+              </div>
+              <div class="form-group">
+                <label for="inv-gpu-mem">Cuánta memoria utiliza</label>
+                <input type="text" id="inv-gpu-mem" name="gpuMem" placeholder="Ej. 2 GB / 4 GB">
+              </div>
+            </article>
+
+            <!-- 5. MONITOR -->
+            <article class="card inv-card">
+              <h3>5. MONITOR</h3>
+              <div class="form-group">
+                <label for="inv-mon-tipo">Tipo de monitor</label>
+                <input type="text" id="inv-mon-tipo" name="monTipo" placeholder="Ej. LED 21.5 pulgadas">
+              </div>
+            </article>
+
+            <!-- 6. TECLADO -->
+            <article class="card inv-card">
+              <h3>6. TECLADO</h3>
+              <div class="form-group">
+                <label for="inv-tec-marca">Marca del teclado</label>
+                <input type="text" id="inv-tec-marca" name="tecMarca" placeholder="Ej. Logitech / HP">
+              </div>
+            </article>
+
+            <!-- 7. MOUSE -->
+            <article class="card inv-card">
+              <h3>7. MOUSE</h3>
+              <div class="form-group">
+                <label for="inv-mouse-marca">Marca del mouse</label>
+                <input type="text" id="inv-mouse-marca" name="mouseMarca" placeholder="Ej. Logitech / Genius">
+              </div>
+            </article>
+
+            <!-- 8. SWITCH -->
+            <article class="card inv-card">
+              <h3>8. SWITCH</h3>
+              <div class="form-group">
+                <label for="inv-sw-marca">Marca</label>
+                <input type="text" id="inv-sw-marca" name="swMarca" placeholder="Ej. TP-Link / D-Link">
+              </div>
+              <div class="form-group">
+                <label for="inv-sw-puertos">Puertos</label>
+                <input type="number" min="1" max="128" id="inv-sw-puertos" name="swPuertos" placeholder="Ej. 24">
+                <span class="field-error" aria-live="polite"></span>
+              </div>
+            </article>
+
+            <!-- 9. PROYECTOR -->
+            <article class="card inv-card">
+              <h3>9. PROYECTOR</h3>
+              <div class="form-group">
+                <label for="inv-proy-marca">Marca</label>
+                <input type="text" id="inv-proy-marca" name="proyMarca" placeholder="Ej. Epson / BenQ">
+              </div>
+            </article>
+
+            <!-- 10. ECRAN -->
+            <article class="card inv-card">
+              <h3>10. ECRAN (pantalla de proyección)</h3>
+              <div class="form-group">
+                <label for="inv-ecran-func">¿Funciona?</label>
+                <select id="inv-ecran-func" name="ecranFunc">
+                  <option value="">Seleccionar...</option>
+                  <option value="Sí">Sí</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+            </article>
+
+            <!-- 11. INTERNET -->
+            <article class="card inv-card">
+              <h3>11. INTERNET</h3>
+              <div class="form-group">
+                <label for="inv-net-ip">IPv4</label>
+                <input type="text" id="inv-net-ip" name="netIp" class="ip-field" placeholder="Ej. 192.168.137.10">
+                <span class="field-error" aria-live="polite"></span>
+              </div>
+              <div class="form-group">
+                <label for="inv-net-mask">Máscara de subred</label>
+                <input type="text" id="inv-net-mask" name="netMask" class="ip-field" placeholder="Ej. 255.255.255.0">
+                <span class="field-error" aria-live="polite"></span>
+              </div>
+              <div class="form-group">
+                <label for="inv-net-gw">Puerta de enlace</label>
+                <input type="text" id="inv-net-gw" name="netGw" class="ip-field" value="192.168.137.1" placeholder="192.168.137.1">
+                <span class="field-error" aria-live="polite"></span>
+              </div>
+            </article>
+
+            <!-- 12. TELEVISOR -->
+            <article class="card inv-card">
+              <h3>12. TELEVISOR</h3>
+              <div class="form-group">
+                <label for="inv-tv-marca">Marca</label>
+                <input type="text" id="inv-tv-marca" name="tvMarca" placeholder="Ej. Samsung / LG">
+              </div>
+              <div class="form-group">
+                <label for="inv-tv-pulg">Pulgadas</label>
+                <input type="number" min="10" max="120" id="inv-tv-pulg" name="tvPulg" placeholder="Ej. 55">
+                <span class="field-error" aria-live="polite"></span>
+              </div>
+            </article>
+          </div>
+
+          <div class="inventory-actions">
+            <button type="submit" class="btn btn-primary">💾 Guardar</button>
+            <button type="button" id="exportJsonBtn" class="btn btn-secondary">⬇️ Exportar inventario (.json)</button>
+            <button type="button" id="exportTxtBtn" class="btn btn-secondary">📄 Exportar inventario (.txt)</button>
+            <button type="button" id="clearInvBtn" class="btn btn-danger-outline">🗑️ Borrar todo</button>
+          </div>
+          <p id="invStatusMsg" class="status-msg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p><strong>CENTRO DE EDUCACIÓN TÉCNICO PRODUCTIVA "JESÚS OBRERO"</strong></p>
+      <p>Año de la Esperanza y el Fortalecimiento de la Democracia · Lima, Perú</p>
+      <p class="footer-note">Especialidad: Plataformas y Servicios de las TI · Módulo: Gestión de Soporte Técnico y Herramientas Informáticas</p>
+    </div>
+  </footer>
+
+  <!-- Botón flotante Volver Arriba -->
+  <button type="button" id="backToTop" class="back-to-top" aria-label="Volver arriba" title="Volver arriba">↑</button>
+
+  <!-- Lightbox para evidencias fotográficas -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Vista ampliada de fotografía" hidden>
+    <button type="button" id="lightboxClose" class="lightbox__close" aria-label="Cerrar vista ampliada">✕</button>
+    <img id="lightboxImg" src="" alt="Fotografía ampliada" class="lightbox__img">
+    <p id="lightboxCaption" class="lightbox__caption"></p>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
